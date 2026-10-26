@@ -282,65 +282,43 @@ const getStudentNotifications = async (
 // GET ADMIN NOTIFICATIONS
 // =========================================================
 
-const getAdminNotifications = async (
-    req,
-    res
-) => {
-
-    try {
-
-        const adminId =
-            req.admin.admin_id;
-
-
-        const [notifications] =
-            await db.execute(
-                `
-                SELECT
-                    id,
-                    admin_id,
-                    request_id,
-                    message,
-                    type,
-                    is_read,
-                    created_at
-                FROM notifications
-                WHERE admin_id = ?
-                ORDER BY created_at DESC
-                `,
-                [adminId]
-            );
+const getAdminNotifications = async (req, res) => {
+try {
+const [notifications] = await db.execute(`             SELECT
+                n.id,
+                n.student_id,
+                n.request_id,
+                n.message,
+                n.type,
+                n.is_read,
+                n.created_at
+            FROM notifications n
+            ORDER BY n.created_at DESC
+        `);
 
 
-        res.status(200).json({
+    return res.status(200).json({
+        success: true,
+        notifications: notifications
+    });
 
-            success: true,
+} catch (error) {
+    console.error(
+        "Get admin notifications error:",
+        error.message
+    );
 
-            notifications
+    return res.status(500).json({
+        success: false,
+        message: "Failed to fetch notifications"
+    });
+}
 
-        });
-
-    }
-
-    catch (error) {
-
-        console.error(
-            "Get admin notifications error:",
-            error
-        );
-
-        res.status(500).json({
-
-            success: false,
-
-            message:
-                "Failed to fetch notifications"
-
-        });
-
-    }
 
 };
+
+
+
 
 
 
