@@ -130,30 +130,26 @@ const createStaff = async (req, res) => {
         }
 
         const temporaryPassword = generateTemporaryPassword();
-        const hashedPassword = await bcrypt.hash(temporaryPassword, 10);
+const hashedPassword = await bcrypt.hash(temporaryPassword, 10);
 
-        const [result] = await db.execute(
-            `
-            INSERT INTO staff
-            (
-                name,
-                email,
-                password,
-                department_id,
-                designation,
-                status,
-                must_change_password
-            )
-            VALUES (?, ?, ?, ?, ?, 'Active', 1)
-            `,
-            [
-                cleanName,
-                cleanEmail,
-                hashedPassword,
-                department_id,
-                cleanDesignation
-            ]
-        );
+const [result] = await db.execute(
+    `
+    INSERT INTO staff
+    (
+        name,
+        email,
+        password,
+        department_id
+    )
+    VALUES (?, ?, ?, ?)
+    `,
+    [
+        cleanName,
+        cleanEmail,
+        hashedPassword,
+        department_id
+    ]
+);
 
         res.status(201).json({
             success: true,
