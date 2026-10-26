@@ -1,0 +1,349 @@
+/* =========================================================
+   ADMIN LOGIN PAGE
+   Campus Request Management System
+   ========================================================= */
+
+:root {
+    --dark: #22223B;
+    --slate: #4A4E69;
+    --muted: #9A8C98;
+    --rose: #C9ADA7;
+    --light: #F2E9E4;
+}
+
+
+/* ================= RESET ================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* ================= BODY ================= */
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+
+    background: var(--light);
+
+    color: var(--dark);
+
+    min-height: 100vh;
+}
+
+
+/* ================= MAIN CONTAINER ================= */
+
+.login-container {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 30px;
+}
+
+
+/* ================= LOGIN CARD ================= */
+
+.login-card {
+
+    width: 100%;
+
+    max-width: 430px;
+
+    background: #ffffff;
+
+    border: 1px solid var(--muted);
+
+    border-radius: 14px;
+
+    padding: 40px;
+
+    box-shadow: 0 10px 30px rgba(34, 34, 59, 0.12);
+
+    text-align: center;
+}
+
+
+/* ================= LOGIN ICON ================= */
+
+.login-icon {
+
+    width: 70px;
+
+    height: 70px;
+
+    border-radius: 50%;
+
+    background: var(--dark);
+
+    color: var(--light);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin: 0 auto 20px;
+
+    font-size: 30px;
+}
+
+
+/* ================= HEADING ================= */
+
+.login-card h1 {
+
+    color: var(--dark);
+
+    font-size: 28px;
+
+    margin-bottom: 8px;
+}
+
+
+.login-subtitle {
+
+    color: var(--slate);
+
+    font-size: 14px;
+
+    margin-bottom: 7px;
+}
+
+
+.login-description {
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+    margin-bottom: 30px;
+}
+
+
+/* ================= FORM ================= */
+
+#admin-login-form {
+
+    text-align: left;
+}
+
+
+/* ================= INPUT GROUP ================= */
+
+.input-group {
+
+    margin-bottom: 20px;
+}
+
+
+.input-group label {
+
+    display: block;
+
+    color: var(--dark);
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    margin-bottom: 7px;
+}
+
+
+/* ================= INPUT ================= */
+
+.input-group input {
+
+    width: 100%;
+
+    padding: 13px 14px;
+
+    border: 1px solid var(--muted);
+
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    color: var(--dark);
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition: 0.2s ease;
+}
+
+
+.input-group input::placeholder {
+
+    color: #9A8C98;
+}
+
+
+.input-group input:focus {
+
+    border-color: var(--slate);
+
+    box-shadow: 0 0 0 3px rgba(154, 140, 152, 0.2);
+}
+
+
+/* ================= LOGIN BUTTON ================= */
+
+.login-btn {
+
+    width: 100%;
+
+    border: none;
+
+    background: var(--dark);
+
+    color: var(--light);
+
+    padding: 13px 20px;
+
+    border-radius: 7px;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+
+    margin-top: 5px;
+}
+
+
+.login-btn:hover {
+
+    background: var(--slate);
+
+}
+
+
+.login-btn:disabled {
+
+    opacity: 0.6;
+
+    cursor: not-allowed;
+}
+
+
+/* ================= ERROR MESSAGE ================= */
+
+.login-error {
+
+    min-height: 20px;
+
+    color: #b23a48;
+
+    font-size: 13px;
+
+    text-align: center;
+
+    margin-top: 12px;
+}
+
+
+/* ================= SECURITY MESSAGE ================= */
+
+.security-message {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 25px;
+
+    padding: 12px;
+
+    background: var(--light);
+
+    border-radius: 8px;
+
+    text-align: left;
+}
+
+
+.security-message span {
+
+    font-size: 18px;
+
+    flex-shrink: 0;
+}
+
+
+.security-message p {
+
+    color: var(--slate);
+
+    font-size: 12px;
+
+    line-height: 1.4;
+}
+
+
+/* ================= BACK LINK ================= */
+
+.back-link {
+
+    display: inline-block;
+
+    margin-top: 25px;
+
+    color: var(--slate);
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    transition: 0.2s ease;
+}
+
+
+.back-link:hover {
+
+    color: var(--dark);
+
+    text-decoration: underline;
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 500px) {
+
+    .login-container {
+
+        padding: 20px;
+    }
+
+
+    .login-card {
+
+        padding: 30px 22px;
+    }
+
+
+    .login-card h1 {
+
+        font-size: 24px;
+    }
+
+}

@@ -1,0 +1,1528 @@
+html 
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+```
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Admin Dashboard - Campus Request Management System</title>
+
+<link rel="stylesheet"
+      href="admin-dashboard.css">
+```
+
+</head>
+
+<body>
+
+```
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar">
+
+    <div class="sidebar-header">
+
+        <h2>
+            Campus Request
+        </h2>
+
+        <p>
+            Management System
+        </p>
+
+    </div>
+
+
+    <nav class="sidebar-nav">
+
+
+        <!-- Dashboard -->
+
+        <a href="#"
+           class="nav-item active"
+           onclick="showSection('dashboard', this); return false;">
+
+            <span>⌂</span>
+
+            Dashboard
+
+        </a>
+
+
+        <!-- Manage Requests -->
+
+        <a href="#"
+           class="nav-item"
+           onclick="showSection('requests', this); return false;">
+
+            <span>▤</span>
+
+            Manage Requests
+
+        </a>
+
+
+        <!-- Manage Staff -->
+
+        <a href="#"
+           class="nav-item"
+           onclick="showSection('staff', this); return false;">
+
+            <span>♙</span>
+
+            Manage Staff
+
+        </a>
+
+
+        <!-- Students -->
+
+        <a href="#"
+           class="nav-item"
+           onclick="showSection('students', this); return false;">
+
+            <span>♙</span>
+
+            Students
+
+        </a>
+
+
+        <!-- Departments -->
+
+        <a href="#"
+           class="nav-item"
+           onclick="showSection('departments', this); return false;">
+
+            <span>▦</span>
+
+            Departments
+
+        </a>
+
+
+    </nav>
+
+
+    <!-- ================= LOGOUT ================= -->
+
+    <div class="sidebar-bottom">
+
+        <a href="admin-login.html"
+           class="logout-btn"
+           onclick="logoutAdmin();">
+
+            <span>↪</span>
+
+            Logout
+
+        </a>
+
+    </div>
+
+</aside>
+
+
+
+<!-- ================= MAIN CONTENT ================= -->
+
+<main class="main-content">
+
+
+    <!-- ================= TOP HEADER ================= -->
+
+    <header class="top-header">
+
+
+        <div>
+
+            <h1 id="page-title">
+                Admin Dashboard
+            </h1>
+
+            <p>
+                Manage campus requests, staff and students.
+            </p>
+
+        </div>
+
+
+        <!-- ================= ADMIN PROFILE ================= -->
+
+        <div class="admin-header-right">
+
+
+    <!-- ================= NOTIFICATIONS ================= -->
+
+    <div class="admin-notification-wrapper">
+
+        <button
+            type="button"
+            class="admin-notification-btn"
+            id="adminNotificationBtn"
+            title="Notifications"
+        >
+
+            🔔
+
+            <span
+                class="admin-notification-badge hidden"
+                id="adminNotificationBadge"
+            >
+                0
+            </span>
+
+        </button>
+
+
+        <!-- NOTIFICATION DROPDOWN -->
+
+        <div
+            class="admin-notification-dropdown"
+            id="adminNotificationDropdown"
+        >
+
+            <div class="admin-notification-header">
+
+                <h3>
+                    Notifications
+                </h3>
+
+                <button
+                    type="button"
+                    id="adminMarkAllReadBtn"
+                    class="admin-mark-read-btn"
+                >
+                    Mark all as read
+                </button>
+
+            </div>
+
+
+            <div
+                id="adminNotificationList"
+                class="admin-notification-list"
+            >
+
+                <div class="admin-no-notifications">
+                    No new notifications
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= ADMIN PROFILE ================= -->
+
+    <div class="admin-profile">
+
+        <div
+            class="profile-icon"
+            id="profileIcon"
+        >
+            A
+        </div>
+
+        <div>
+
+            <h3 id="adminName">
+                Administrator
+            </h3>
+
+            <p id="adminEmail">
+                admin@college.edu
+            </p>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+</header>
+    <!-- =====================================================
+         DASHBOARD SECTION
+         ===================================================== -->
+
+    <section id="dashboard"
+             class="content-section active-section">
+
+
+        <!-- ================= WELCOME BOX ================= -->
+
+        <div class="welcome-box">
+
+
+            <div>
+
+                <h2>
+                    Welcome, Administrator
+                </h2>
+
+                <p>
+                    Monitor and manage the Campus Request
+                    Management System.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ================= STATISTICS ================= -->
+
+        <div class="stats-container">
+
+
+            <!-- Total Requests -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ▤
+                </div>
+
+                <div>
+
+                    <h3 id="totalRequests">
+                        0
+                    </h3>
+
+                    <p>
+                        Total Requests
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Pending -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ◷
+                </div>
+
+                <div>
+
+                    <h3 id="pendingRequests">
+                        0
+                    </h3>
+
+                    <p>
+                        Pending
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- In Progress -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ↻
+                </div>
+
+                <div>
+
+                    <h3 id="inProgressRequests">
+                        0
+                    </h3>
+
+                    <p>
+                        In Progress
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Completed -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ✓
+                </div>
+
+                <div>
+
+                    <h3 id="completedRequests">
+                        0
+                    </h3>
+
+                    <p>
+                        Completed
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ================= QUICK OVERVIEW ================= -->
+
+        <div class="section-card">
+
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        System Overview
+                    </h2>
+
+                    <p>
+                        Quick overview of the portal.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="overview-grid">
+
+
+                <div class="overview-card">
+
+                    <h3 id="totalStudents">
+                        0
+                    </h3>
+
+                    <p>
+                        Registered Students
+                    </p>
+
+                </div>
+
+
+                <div class="overview-card">
+
+                    <h3 id="totalStaff">
+                        0
+                    </h3>
+
+                    <p>
+                        Staff Members
+                    </p>
+
+                </div>
+
+
+                <div class="overview-card">
+
+                    <h3 id="totalDepartments">
+                        4
+                    </h3>
+
+                    <p>
+                        Departments
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         MANAGE REQUESTS SECTION
+         ===================================================== -->
+
+    <section id="requests"
+             class="content-section">
+
+
+        <div class="section-card">
+
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        Manage Requests
+                    </h2>
+
+                    <p>
+                        View and manage all student requests.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="request-table-container">
+
+                <table class="request-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Request ID
+                            </th>
+
+                            <th>
+                                Student
+                            </th>
+
+                            <th>
+                                Subject
+                            </th>
+
+                            <th>
+                                Department
+                            </th>
+
+                            <th>
+                                Date
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="adminRequestsBody">
+
+                        <tr>
+
+                            <td colspan="7"
+                                class="no-data">
+
+                                No requests available.
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         MANAGE STAFF SECTION
+         ===================================================== -->
+
+    <section id="staff"
+             class="content-section">
+
+
+        <div class="section-card">
+
+
+            <!-- ================= STAFF HEADER ================= -->
+
+            <div class="section-heading">
+
+
+                <div>
+
+                    <h2>
+                        Manage Staff
+                    </h2>
+
+                    <p>
+                        Create and manage staff accounts
+                        for the four departments.
+                    </p>
+
+                </div>
+
+
+                <button
+                    onclick="showAddStaffForm()">
+
+                    + Add Staff
+
+                </button>
+
+
+            </div>
+
+
+
+            <!-- ================= SEARCH & FILTERS ================= -->
+
+            <div class="staff-filters">
+
+
+                <!-- Search -->
+
+                <div class="staff-search">
+
+                    <input
+                        type="text"
+                        id="staffSearch"
+                        placeholder="Search staff by name or email..."
+                        onkeyup="filterStaff()">
+
+                </div>
+
+
+                <!-- Department Filter -->
+
+                <div class="staff-filter">
+
+                    <select
+                        id="departmentFilter"
+                        onchange="filterStaff()">
+
+                        <option value="all">
+                            All Departments
+                        </option>
+
+                        <option value="Engineering">
+                            Engineering
+                        </option>
+
+                        <option value="Pharmacy">
+                            Pharmacy
+                        </option>
+
+                        <option value="Hotel Management">
+                            Hotel Management
+                        </option>
+
+                        <option value="Management and Technology">
+                            Management and Technology
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Status Filter -->
+
+                <div class="staff-filter">
+
+                    <select
+                        id="statusFilter"
+                        onchange="filterStaff()">
+
+                        <option value="all">
+                            All Status
+                        </option>
+
+                        <option value="Active">
+                            Active
+                        </option>
+
+                        <option value="Inactive">
+                            Inactive
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ================= STAFF TABLE ================= -->
+
+            <div class="request-table-container">
+
+                <table class="request-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Staff ID
+                            </th>
+
+                            <th>
+                                Name
+                            </th>
+
+                            <th>
+                                Email
+                            </th>
+
+                            <th>
+                                Department
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="staffTableBody">
+
+                        <tr>
+
+                            <td colspan="6"
+                                class="no-data">
+
+                                No staff members available.
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+   <!-- ==========================================
+     STUDENTS SECTION
+========================================== -->
+
+<section id="students" class="content-section">
+
+    <div class="section-header">
+
+        <!-- <div>
+            <h2>Students</h2>
+            <p>View and manage registered students.</p>
+        </div> -->
+
+    </div>
+
+
+    <!-- STUDENT FILTERS -->
+
+    <div class="student-filters">
+
+        <!-- Search -->
+        <div class="student-search-box">
+
+            <span class="search-icon">⌕</span>
+
+            <input
+                type="text"
+                id="studentSearchInput"
+                placeholder="Search students by name, roll number or email..."
+                autocomplete="off"
+            >
+
+        </div>
+
+
+        <!-- Department -->
+        <div class="student-department-filter">
+
+            <label for="studentDepartmentFilter">
+                Department
+            </label>
+
+            <select id="studentDepartmentFilter">
+
+                <option value="">
+                    All Departments
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <!-- STUDENT TABLE -->
+
+    <div class="students-table-container">
+
+        <table class="students-table">
+
+            <thead>
+
+                <tr>
+                    <th>Student ID</th>
+                    <th>Student</th>
+                    <th>Roll No.</th>
+                    <th>Email</th>
+                    <th>Department</th>
+                    <th>Requests</th>
+                    <th>Registered On</th>
+                    <th>Action</th>
+                </tr>
+
+            </thead>
+
+            <tbody id="studentsTableBody">
+
+                <tr>
+                    <td colspan="8" class="table-loading">
+                        Loading students...
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    <!-- EMPTY STATE -->
+
+    <div
+        id="studentsEmptyState"
+        class="students-empty-state"
+        style="display: none;"
+    >
+
+        <div class="empty-icon">🎓</div>
+
+        <h3>No students found</h3>
+
+        <p>
+            No students match your current search or department filter.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ==========================================
+     STUDENT DETAILS MODAL
+========================================== -->
+
+<div
+    id="studentDetailsModal"
+    class="student-details-modal"
+>
+
+    <div class="student-details-overlay"></div>
+
+    <div class="student-details-container">
+
+        <!-- HEADER -->
+
+        <div class="student-details-header">
+
+            <div>
+
+                <span class="student-modal-label">
+                    STUDENT DETAILS
+                </span>
+
+                <h2 id="studentModalName">
+                    Student
+                </h2>
+
+                <p id="studentModalId">
+                    Student ID
+                </p>
+
+            </div>
+
+            <button
+                type="button"
+                class="student-modal-close"
+                onclick="closeStudentDetailsModal()"
+            >
+                &times;
+            </button>
+
+        </div>
+
+
+        <!-- STUDENT INFORMATION -->
+
+        <div class="student-info-section">
+
+            <h3>Student Information</h3>
+
+            <div class="student-info-grid">
+
+                <div class="student-info-item">
+
+                    <span>Student ID</span>
+
+                    <strong id="detailStudentId">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="student-info-item">
+
+                    <span>Full Name</span>
+
+                    <strong id="detailStudentName">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="student-info-item">
+
+                    <span>Roll Number</span>
+
+                    <strong id="detailStudentRoll">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="student-info-item">
+
+                    <span>Email</span>
+
+                    <strong id="detailStudentEmail">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="student-info-item">
+
+                    <span>Department</span>
+
+                    <strong id="detailStudentDepartment">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="student-info-item">
+
+                    <span>Registered On</span>
+
+                    <strong id="detailStudentRegistered">
+                        -
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- REQUEST SUMMARY -->
+
+        <div class="student-request-summary">
+
+            <div>
+
+                <span>Total Requests</span>
+
+                <strong id="studentTotalRequests">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- REQUEST HISTORY -->
+
+        <div class="student-request-history">
+
+            <h3>Request History</h3>
+
+            <div class="student-request-table-wrapper">
+
+                <table class="student-request-table">
+
+                    <thead>
+
+                        <tr>
+                            <th>Request ID</th>
+                            <th>Subject</th>
+                            <th>Type</th>
+                            <th>Status</th>
+                            <th>Submitted On</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="studentRequestHistoryBody">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+        <!-- FOOTER -->
+
+        <div class="student-details-footer">
+
+            <button
+                type="button"
+                class="student-close-button"
+                onclick="closeStudentDetailsModal()"
+            >
+                Close
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+    <!-- =====================================================
+         DEPARTMENTS SECTION
+         ===================================================== -->
+
+    <section id="departments"
+             class="content-section">
+
+
+        <div class="section-card">
+
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        Departments
+                    </h2>
+
+                    <p>
+                        Departments available in the system.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="department-grid">
+
+
+                <!-- Engineering -->
+
+                <div class="department-card">
+
+                    <h3>
+                        Engineering
+                    </h3>
+
+                    <p>
+                        Department ID: 1
+                    </p>
+
+                </div>
+
+
+                <!-- Pharmacy -->
+
+                <div class="department-card">
+
+                    <h3>
+                        Pharmacy
+                    </h3>
+
+                    <p>
+                        Department ID: 2
+                    </p>
+
+                </div>
+
+
+                <!-- Hotel Management -->
+
+                <div class="department-card">
+
+                    <h3>
+                        Hotel Management
+                    </h3>
+
+                    <p>
+                        Department ID: 3
+                    </p>
+
+                </div>
+
+
+                <!-- Management and Technology -->
+
+                <div class="department-card">
+
+                    <h3>
+                        Management and Technology
+                    </h3>
+
+                    <p>
+                        Department ID: 4
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+<!-- Department Performance Report -->
+<div class="panel department-report hidden" id="departmentReport">
+
+    <div class="panel-head">
+        <div>
+            <span class="eyebrow">DEPARTMENT ANALYTICS</span>
+            <h3 id="departmentReportTitle">Department report</h3>
+            <p id="departmentReportSubtitle">
+                Request history and department performance
+            </p>
+        </div>
+
+        <button
+            class="icon-button"
+            id="closeDepartmentReport"
+            type="button"
+            aria-label="Close department report">
+            ×
+        </button>
+    </div>
+
+    <!-- Department statistics -->
+    <div
+        class="mini-stats"
+        id="departmentReportStats">
+    </div>
+
+    <!-- Request history -->
+    <div class="department-report-section">
+
+        <div class="panel-head">
+            <div>
+                <h3>Request history</h3>
+                <p>Requests submitted to this department</p>
+            </div>
+        </div>
+
+        <div class="filter-bar">
+
+            <input
+                type="search"
+                id="departmentRequestSearch"
+                placeholder="Search subject or student...">
+
+            <select id="departmentRequestStatus">
+                <option value="">All statuses</option>
+                <option value="New">New</option>
+                <option value="Accepted">Accepted</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Completed">Completed</option>
+                <option value="Rejected">Rejected</option>
+            </select>
+
+        </div>
+
+        <div class="table-wrap">
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Request ID</th>
+                        <th>Student</th>
+                        <th>Subject</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                        <th>Submitted</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="departmentRequestsTable">
+                    <tr>
+                        <td colspan="7" class="empty">
+                            Select a department to view its requests.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+
+    <!-- Staff directory for this department -->
+    <div class="department-report-section">
+
+        <div class="panel-head">
+            <div>
+                <h3>Department staff</h3>
+                <p>Staff members associated with this department</p>
+            </div>
+        </div>
+
+        <div class="table-wrap">
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Staff member</th>
+                        <th>Email</th>
+                        <th>Designation</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody id="departmentStaffTable">
+                    <tr>
+                        <td colspan="4" class="empty">
+                            No staff information available.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+</main>
+
+
+
+<!-- =========================================================
+     ADD / EDIT STAFF MODAL
+     ========================================================= -->
+
+<div
+    id="staffModal"
+    class="staff-modal">
+
+
+    <div class="staff-modal-content">
+
+
+        <!-- Modal Header -->
+
+        <div class="staff-modal-header">
+
+            <h2 id="staffModalTitle">
+                Add New Staff
+            </h2>
+
+            <button
+                type="button"
+                class="staff-modal-close"
+                onclick="closeStaffModal()">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+
+        <!-- Staff Form -->
+
+        <form
+            id="staffForm"
+            onsubmit="saveStaff(event)">
+
+
+            <!-- Name -->
+
+            <div class="staff-form-group">
+
+                <label for="staffName">
+                    Full Name
+                </label>
+
+                <input
+                    type="text"
+                    id="staffName"
+                    placeholder="Enter staff name"
+                    required>
+
+            </div>
+
+
+
+            <!-- Email -->
+
+            <div class="staff-form-group">
+
+    <label for="staffEmail">
+        Official .edu Email
+    </label>
+
+    <div class="staff-email-wrapper">
+
+        <input
+            type="email"
+            id="staffEmail"
+            placeholder="Enter staff email"
+            required
+            autocomplete="off">
+
+        <span
+            id="staffEmailValidIcon"
+            class="staff-email-valid-icon"
+            aria-hidden="true">
+            ✓
+        </span>
+
+    </div>
+
+    <small class="staff-email-hint">
+        Only official .edu email addresses are allowed.
+    </small>
+
+</div>
+
+
+
+            <!-- Department -->
+
+            <div class="staff-form-group">
+
+                <label for="staffDepartment">
+                    Department
+                </label>
+
+                <select
+                    id="staffDepartment"
+                    required>
+
+                    <option value="">
+                        Select Department
+                    </option>
+
+                    <option value="Engineering">
+                        Engineering
+                    </option>
+
+                    <option value="Pharmacy">
+                        Pharmacy
+                    </option>
+
+                    <option value="Hotel Management">
+                        Hotel Management
+                    </option>
+
+                    <option value="Management and Technology">
+                        Management and Technology
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- Designation -->
+
+            <div class="staff-form-group">
+
+                <label for="staffDesignation">
+                    Designation
+                </label>
+
+                <input
+                    type="text"
+                    id="staffDesignation"
+                    placeholder="e.g. Assistant Professor"
+                    required>
+
+            </div>
+
+
+
+            <!-- Buttons -->
+
+            <div class="staff-modal-actions">
+
+                <button
+                    type="button"
+                    class="staff-cancel-btn"
+                    onclick="closeStaffModal()">
+
+                    Cancel
+
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="staff-save-btn">
+
+                    Save Staff
+
+                </button>
+
+            </div>
+
+
+        </form>
+<!-- =====================================================
+     TEMPORARY PASSWORD RESULT
+     ===================================================== -->
+
+<div
+    id="staffCredentialsResult"
+    class="staff-credentials-result"
+    style="display: none;">
+
+    <div class="credentials-icon">
+        ✓
+    </div>
+
+    <h3>
+        Staff Account Created
+    </h3>
+
+    <p>
+        Give the following temporary password to the staff member.
+    </p>
+
+    <div class="credential-item">
+
+        <span>
+            Staff Email
+        </span>
+
+        <strong id="createdStaffEmail">
+            -
+        </strong>
+
+    </div>
+
+    <div class="credential-item">
+
+        <span>
+            Temporary Password
+        </span>
+
+        <div class="temporary-password-row">
+
+            <strong id="temporaryStaffPassword">
+                -
+            </strong>
+
+            <button
+                type="button"
+                onclick="copyTemporaryPassword()">
+                Copy
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="credentials-warning">
+
+        The staff member must change this password
+        after the first login.
+
+    </div>
+
+    <button
+        type="button"
+        class="staff-save-btn"
+        onclick="closeStaffCredentials()">
+
+        Done
+
+    </button>
+
+</div>
+
+    </div>
+
+</div>
+
+
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script src="admin-dashboard.js"></script>
+```
+
+</body>
+
+</html>

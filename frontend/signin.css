@@ -1,0 +1,585 @@
+/* =========================================
+   SIGN IN PAGE
+   ========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    background: #171b3a;
+    color: #ffffff;
+    overflow: hidden;
+}
+
+
+/* =========================================
+   MAIN LAYOUT
+   ========================================= */
+
+.signin-page {
+    width: 100%;
+    height: 100vh;
+    min-height: 620px;
+
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+
+/* =========================================
+   LEFT VISUAL SIDE
+   ========================================= */
+
+.signin-visual {
+    position: relative;
+
+    height: 100vh;
+
+    background-image: url("images/campus-background.webp");
+    background-size: cover;
+    background-position: center;
+
+    overflow: hidden;
+}
+
+
+/* Dark overlay */
+
+.visual-overlay {
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(10, 17, 43, 0.82),
+            rgba(14, 25, 54, 0.66)
+        );
+}
+
+
+/* Subtle blue tint */
+
+.signin-visual::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at 20% 80%,
+            rgba(175, 190, 220, 0.08),
+            transparent 40%
+        );
+
+    pointer-events: none;
+}
+
+
+/* =========================================
+   LEFT CONTENT
+   ========================================= */
+
+.visual-content {
+    position: relative;
+    z-index: 2;
+
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 48px 60px 42px;
+}
+
+
+/* =========================================
+   LOGO
+   ========================================= */
+
+.college-logo {
+    width: 100px;
+    height: 100px;
+
+    object-fit: contain;
+
+    margin-bottom: auto;
+
+    filter:
+        drop-shadow(0 4px 12px rgba(0, 0, 0, 0.25));
+}
+
+
+/* =========================================
+   LEFT TEXT
+   ========================================= */
+
+.visual-text {
+    max-width: 620px;
+
+    margin-bottom: auto;
+}
+
+
+.eyebrow {
+    font-size: 13px;
+    font-weight: 700;
+
+    letter-spacing: 5px;
+
+    color: #d6b58b;
+
+    margin-bottom: 22px;
+}
+
+
+.visual-text h1 {
+    font-size: clamp(48px, 4.3vw, 72px);
+
+    line-height: 0.98;
+
+    font-weight: 500;
+
+    letter-spacing: -2px;
+
+    color: #ffffff;
+
+    margin-bottom: 30px;
+}
+
+
+.visual-description {
+    max-width: 560px;
+
+    font-size: 18px;
+
+    line-height: 1.7;
+
+    color: rgba(255, 255, 255, 0.86);
+
+    font-weight: 400;
+}
+
+
+/* =========================================
+   LEFT FOOTER
+   ========================================= */
+
+.visual-footer {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    font-size: 11px;
+
+    letter-spacing: 3px;
+
+    color: rgba(255, 255, 255, 0.72);
+}
+
+
+.footer-line {
+    width: 42px;
+    height: 1px;
+
+    background: rgba(255, 255, 255, 0.5);
+}
+
+
+/* =========================================
+   RIGHT PANEL
+   ========================================= */
+
+.signin-panel {
+    position: relative;
+
+    height: 100vh;
+
+    background: #171b3a;
+
+    display: flex;
+    align-items: center;
+
+    overflow: hidden;
+}
+
+
+/* subtle background detail */
+
+.signin-panel::before {
+    content: "";
+
+    position: absolute;
+
+    width: 520px;
+    height: 520px;
+
+    border-radius: 50%;
+
+    right: -260px;
+    bottom: -260px;
+
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+
+/* =========================================
+   RIGHT CONTENT
+   ========================================= */
+
+.signin-content {
+    position: relative;
+    z-index: 2;
+
+    width: min(560px, 82%);
+
+    margin: 0 auto;
+}
+
+
+/* =========================================
+   HEADING
+   ========================================= */
+
+.signin-heading {
+    margin-bottom: 58px;
+}
+
+
+.signin-heading .eyebrow {
+    color: #c9a77c;
+
+    margin-bottom: 18px;
+}
+
+
+.signin-heading h2 {
+    font-size: clamp(48px, 4vw, 66px);
+
+    line-height: 1;
+
+    font-weight: 500;
+
+    letter-spacing: -2px;
+
+    color: #ffffff;
+
+    margin-bottom: 25px;
+}
+
+
+.signin-description {
+    max-width: 500px;
+
+    font-size: 17px;
+
+    line-height: 1.7;
+
+    color: rgba(255, 255, 255, 0.68);
+}
+
+
+/* =========================================
+   ACCOUNT SELECTION
+   ========================================= */
+
+.account-selection {
+    width: 100%;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+
+/* =========================================
+   ACCOUNT OPTION
+   ========================================= */
+
+.account-option {
+    width: 100%;
+
+    min-height: 125px;
+
+    padding: 28px 4px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 28px;
+
+    background: transparent;
+
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+
+    color: #ffffff;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        background 0.3s ease,
+        padding 0.3s ease;
+}
+
+
+/*
+   Slightly darker selection background
+*/
+
+.account-option:hover {
+    background: rgba(8, 13, 32, 0.42);
+
+    padding-left: 18px;
+    padding-right: 18px;
+}
+
+
+/* =========================================
+   ACCOUNT ICON
+   ========================================= */
+
+.account-icon {
+    flex-shrink: 0;
+
+    width: 62px;
+    height: 62px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #0e132e;
+
+    border: 1px solid rgba(255, 255, 255, 0.12);
+
+    color: #ffffff;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    transition:
+        background 0.3s ease,
+        transform 0.3s ease;
+}
+
+
+.account-option:hover .account-icon {
+    background: #0a0f27;
+
+    transform: scale(1.04);
+}
+
+
+/* =========================================
+   ACCOUNT TEXT
+   ========================================= */
+
+.account-info {
+    flex: 1;
+}
+
+
+.account-info h3 {
+    font-size: 25px;
+
+    font-weight: 600;
+
+    letter-spacing: -0.5px;
+
+    margin-bottom: 7px;
+
+    color: #ffffff;
+}
+
+
+.account-info p {
+    font-size: 15px;
+
+    line-height: 1.5;
+
+    color: rgba(255, 255, 255, 0.62);
+
+    margin: 0;
+}
+
+
+/* =========================================
+   SECURE ACCESS
+   ========================================= */
+
+.secure-access {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    margin-top: 34px;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    letter-spacing: 3px;
+
+    color: rgba(255, 255, 255, 0.52);
+}
+
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: #71977e;
+
+    box-shadow:
+        0 0 0 4px rgba(113, 151, 126, 0.08);
+}
+
+
+/* =========================================
+   TABLET
+   ========================================= */
+
+@media (max-width: 1000px) {
+
+    .signin-page {
+        grid-template-columns: 45% 55%;
+    }
+
+    .visual-content {
+        padding: 40px;
+    }
+
+    .signin-content {
+        width: 82%;
+    }
+
+    .visual-text h1 {
+        font-size: 48px;
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 700px) {
+
+    html,
+    body {
+        overflow: auto;
+    }
+
+    .signin-page {
+        min-height: 100vh;
+        height: auto;
+
+        display: flex;
+        flex-direction: column;
+    }
+
+
+    /* Smaller visual header */
+
+    .signin-visual {
+        height: 260px;
+        min-height: 260px;
+    }
+
+
+    .visual-content {
+        padding: 28px 25px;
+    }
+
+
+    .college-logo {
+        width: 62px;
+        height: 62px;
+    }
+
+
+    .visual-text {
+        display: none;
+    }
+
+
+    .visual-footer {
+        margin-top: auto;
+    }
+
+
+    /* Sign in section */
+
+    .signin-panel {
+        min-height: calc(100vh - 260px);
+
+        height: auto;
+
+        padding: 60px 0;
+    }
+
+
+    .signin-content {
+        width: 86%;
+    }
+
+
+    .signin-heading {
+        margin-bottom: 40px;
+    }
+
+
+    .signin-heading h2 {
+        font-size: 46px;
+    }
+
+
+    .signin-description {
+        font-size: 15px;
+    }
+
+
+    .account-option {
+        min-height: 105px;
+
+        gap: 18px;
+    }
+
+
+    .account-icon {
+        width: 52px;
+        height: 52px;
+    }
+
+
+    .account-info h3 {
+        font-size: 21px;
+    }
+
+
+    .account-info p {
+        font-size: 14px;
+    }
+
+}

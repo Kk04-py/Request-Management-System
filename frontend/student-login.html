@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Portal | Campus Request Management System</title>
+
+    <link rel="stylesheet" href="student-login.css">
+</head>
+
+<body>
+
+    <div class="student-page">
+
+        <div class="student-container">
+
+            <!-- =====================================================
+                 HEADER
+            ====================================================== -->
+
+            <div class="form-header">
+
+                <div class="logo-wrapper">
+                    <img
+                        src="images/college-logo.png"
+                        alt="College Logo"
+                        class="student-logo"
+                    >
+                </div>
+
+                <div class="header-content">
+                    <span class="portal-label">CAMPUS SERVICES</span>
+
+                    <h1>Student Portal</h1>
+
+                    <p>
+                        Campus Request Management System
+                    </p>
+                </div>
+
+            </div>
+
+
+            <!-- =====================================================
+                 TABS
+            ====================================================== -->
+
+            <div class="tab-buttons">
+
+                <button
+                    type="button"
+                    class="tab-btn active"
+                    onclick="showForm('login')"
+                >
+                    Login
+                </button>
+
+                <button
+                    type="button"
+                    class="tab-btn"
+                    onclick="showForm('register')"
+                >
+                    Register
+                </button>
+
+            </div>
+
+
+            <!-- =====================================================
+                 LOGIN FORM
+            ====================================================== -->
+
+            <form id="login-form" class="form">
+
+                <div class="form-heading">
+
+                    <h2>Welcome back</h2>
+
+                    <p>
+                        Sign in to access your student account
+                    </p>
+
+                </div>
+
+
+                <!-- Roll Number -->
+
+                <div class="input-group">
+
+                    <label for="roll_number">
+                        University Roll Number
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">ID</span>
+
+                        <input
+                            type="text"
+                            id="roll_number"
+                            placeholder="Enter your university roll number"
+                            autocomplete="username"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- Password -->
+
+                <div class="input-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">••</span>
+
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="login-btn"
+                >
+                    <span>Sign In</span>
+                    <span class="button-arrow">→</span>
+                </button>
+
+
+                <div class="form-footer">
+
+                    <span>Don't have an account?</span>
+
+                    <button
+                        type="button"
+                        onclick="showForm('register')"
+                    >
+                        Create an account
+                    </button>
+
+                </div>
+
+            </form>
+
+
+            <!-- =====================================================
+                 REGISTRATION FORM
+            ====================================================== -->
+
+            <form
+                id="register-form"
+                class="form"
+                onsubmit="studentRegister(event)"
+            >
+
+                <div class="form-heading">
+
+                    <h2>Create your account</h2>
+
+                    <p>
+                        Register to submit and track campus requests
+                    </p>
+
+                </div>
+
+
+                <!-- Full Name -->
+
+                <div class="input-group">
+
+                    <label for="register-name">
+                        Full Name
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">A</span>
+
+                        <input
+                            type="text"
+                            id="register-name"
+                            placeholder="Enter your full name"
+                            autocomplete="name"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- Email -->
+
+                <div class="input-group">
+
+                    <label for="register-email">
+                        Email Address
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">@</span>
+
+                        <input
+                            type="email"
+                            id="register-email"
+                            placeholder="Enter your university email"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- Roll Number -->
+
+                <div class="input-group">
+
+                    <label for="register-roll">
+                        University Roll Number
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">ID</span>
+
+                        <input
+                            type="text"
+                            id="register-roll"
+                            placeholder="Enter your roll number"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- Department -->
+
+                <div class="input-group">
+
+                    <label for="register-department">
+                        Department
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">⌂</span>
+
+                        <select
+                            id="register-department"
+                            required
+                        >
+
+                            <option value="">
+                                Select your department
+                            </option>
+
+                            <option value="1">
+                                Engineering
+                            </option>
+
+                            <option value="2">
+                                Hotel Management
+                            </option>
+
+                            <option value="3">
+                                Pharmacy
+                            </option>
+
+                            <option value="4">
+                                Management and Technology
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Password -->
+
+                <div class="input-group">
+
+                    <label for="register-password">
+                        Password
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">••</span>
+
+                        <input
+                            type="password"
+                            id="register-password"
+                            placeholder="Create a password"
+                            autocomplete="new-password"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- Confirm Password -->
+
+                <div class="input-group">
+
+                    <label for="confirm-password">
+                        Confirm Password
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">✓</span>
+
+                        <input
+                            type="password"
+                            id="confirm-password"
+                            placeholder="Confirm your password"
+                            autocomplete="new-password"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="submit-btn"
+                >
+                    <span>Create Account</span>
+                    <span class="button-arrow">→</span>
+                </button>
+
+
+                <div class="form-footer">
+
+                    <span>Already have an account?</span>
+
+                    <button
+                        type="button"
+                        onclick="showForm('login')"
+                    >
+                        Sign in
+                    </button>
+
+                </div>
+
+            </form>
+
+
+            <!-- =====================================================
+                 BACK LINK
+            ====================================================== -->
+
+            <a
+                href="signin.html"
+                class="back-link"
+            >
+                <span>←</span>
+                Back to Sign In Options
+            </a>
+
+
+            <!-- =====================================================
+                 SECURITY NOTE
+            ====================================================== -->
+
+            <div class="security-note">
+
+                <span class="security-icon">✓</span>
+
+                <span>
+                    Your account information is securely protected.
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="student-login.js"></script>
+
+</body>
+
+</html>

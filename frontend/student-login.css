@@ -1,0 +1,1009 @@
+/* ============================================================
+   CAMPUS REQUEST MANAGEMENT SYSTEM
+   STUDENT PORTAL
+   Professional Login / Registration UI
+============================================================ */
+
+
+/* ============================================================
+   ROOT VARIABLES
+============================================================ */
+
+:root {
+
+    --navy: #22223b;
+    --navy-light: #2f304f;
+
+    --slate: #4a4e69;
+
+    --muted: #7d7d91;
+
+    --rose: #c9ada7;
+    --rose-light: #e8d8d4;
+
+    --cream: #f7efeb;
+    --white: #ffffff;
+
+    --border: #ddd1cd;
+
+    --success: #4d8061;
+
+    --shadow:
+        0 25px 70px rgba(0, 0, 0, 0.25);
+
+    --transition: 0.25s ease;
+}
+
+
+/* ============================================================
+   RESET
+============================================================ */
+
+* {
+
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+
+}
+
+
+/* ============================================================
+   BODY
+============================================================ */
+
+body {
+
+    font-family:
+        Inter,
+        "Segoe UI",
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    color: var(--navy);
+
+    background: var(--cream);
+
+    min-height: 100vh;
+
+}
+
+
+/* ============================================================
+   MAIN PAGE
+============================================================ */
+
+.student-page {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 45px 20px;
+
+    position: relative;
+
+    background:
+        linear-gradient(
+            rgba(17, 28, 57, 0.86),
+            rgba(18, 29, 60, 0.90)
+        ),
+        url("images/campus-background.webp");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-attachment: fixed;
+
+}
+
+
+/* subtle overlay pattern */
+
+.student-page::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(255,255,255,0.08),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 85% 80%,
+            rgba(201,173,167,0.10),
+            transparent 30%
+        );
+
+    pointer-events: none;
+
+}
+
+
+/* ============================================================
+   MAIN CARD
+============================================================ */
+
+.student-container {
+
+    width: 100%;
+
+    max-width: 760px;
+
+    background: rgba(247, 239, 235, 0.98);
+
+    padding: 42px 52px 30px;
+
+    border-radius: 24px;
+
+    border: 1px solid rgba(255,255,255,0.5);
+
+    box-shadow: var(--shadow);
+
+    position: relative;
+
+    z-index: 2;
+
+    animation: cardAppear 0.45s ease;
+
+}
+
+
+/* ============================================================
+   CARD ANIMATION
+============================================================ */
+
+@keyframes cardAppear {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(15px)
+            scale(0.98);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+
+/* ============================================================
+   HEADER
+============================================================ */
+
+.form-header {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 25px;
+
+    margin-bottom: 32px;
+
+}
+
+
+/* ============================================================
+   LOGO
+============================================================ */
+
+.logo-wrapper {
+
+    width: 100px;
+
+    height: 100px;
+
+    background: var(--white);
+
+    border-radius: 18px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    border: 1px solid var(--border);
+
+    box-shadow:
+        0 8px 22px rgba(34,34,59,0.10);
+
+    flex-shrink: 0;
+
+}
+
+
+.student-logo {
+
+    width: 78px;
+
+    height: 78px;
+
+    object-fit: contain;
+
+}
+
+
+/* ============================================================
+   HEADER CONTENT
+============================================================ */
+
+.header-content {
+
+    flex: 1;
+
+}
+
+
+.portal-label {
+
+    display: inline-block;
+
+    color: var(--slate);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 7px;
+
+}
+
+
+.form-header h1 {
+
+    color: var(--navy);
+
+    font-size: 38px;
+
+    font-weight: 750;
+
+    line-height: 1.1;
+
+    text-transform: uppercase;
+
+    letter-spacing: -0.5px;
+
+}
+
+
+.form-header p {
+
+    color: var(--slate);
+
+    font-size: 14px;
+
+    margin-top: 7px;
+
+}
+
+
+/* ============================================================
+   TABS
+============================================================ */
+
+.tab-buttons {
+
+    display: flex;
+
+    border-bottom: 1px solid var(--border);
+
+    margin-bottom: 30px;
+
+    position: relative;
+
+}
+
+
+.tab-btn {
+
+    flex: 1;
+
+    border: none;
+
+    background: transparent;
+
+    color: var(--muted);
+
+    padding: 14px 10px;
+
+    font-size: 16px;
+
+    font-weight: 650;
+
+    cursor: pointer;
+
+    position: relative;
+
+    transition: var(--transition);
+
+}
+
+
+.tab-btn:hover {
+
+    color: var(--navy);
+
+}
+
+
+.tab-btn.active {
+
+    color: var(--navy);
+
+}
+
+
+.tab-btn.active::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    right: 0;
+
+    bottom: -1px;
+
+    height: 3px;
+
+    background: var(--navy);
+
+    border-radius: 3px 3px 0 0;
+
+}
+
+
+/* ============================================================
+   FORM
+============================================================ */
+
+.form {
+
+    display: none;
+
+}
+
+
+.form-heading {
+
+    margin-bottom: 26px;
+
+}
+
+
+.form-heading h2 {
+
+    color: var(--navy);
+
+    font-size: 24px;
+
+    font-weight: 700;
+
+    margin-bottom: 6px;
+
+}
+
+
+.form-heading p {
+
+    color: var(--slate);
+
+    font-size: 14px;
+
+}
+
+
+/* ============================================================
+   LOGIN FORM
+============================================================ */
+
+#login-form {
+
+    display: block;
+
+}
+
+
+/* ============================================================
+   REGISTRATION FORM
+============================================================ */
+
+#register-form {
+
+    display: none;
+
+    grid-template-columns: 1fr 1fr;
+
+    column-gap: 24px;
+
+    row-gap: 2px;
+
+}
+
+
+#register-form .form-heading,
+#register-form .submit-btn,
+#register-form .form-footer {
+
+    grid-column: 1 / -1;
+
+}
+
+
+/* ============================================================
+   INPUT GROUP
+============================================================ */
+
+.input-group {
+
+    margin-bottom: 19px;
+
+}
+
+
+.input-group label {
+
+    display: block;
+
+    color: var(--navy);
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    margin-bottom: 8px;
+
+}
+
+
+/* ============================================================
+   INPUT WRAPPER
+============================================================ */
+
+.input-wrapper {
+
+    position: relative;
+
+    width: 100%;
+
+}
+
+
+/* ============================================================
+   INPUT ICON
+============================================================ */
+
+.input-icon {
+
+    position: absolute;
+
+    left: 14px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 24px;
+
+    color: var(--slate);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    text-align: center;
+
+    pointer-events: none;
+
+    z-index: 1;
+
+}
+
+
+/* ============================================================
+   INPUTS
+============================================================ */
+
+.input-group input,
+.input-group select {
+
+    width: 100%;
+
+    height: 50px;
+
+    padding:
+        0 15px 0 47px;
+
+    border:
+
+        1px solid var(--border);
+
+    border-radius: 10px;
+
+    background: var(--white);
+
+    color: var(--navy);
+
+    font-size: 14px;
+
+    font-family: inherit;
+
+    outline: none;
+
+    transition: var(--transition);
+
+}
+
+
+.input-group input::placeholder {
+
+    color: #aaa5ad;
+
+}
+
+
+/* ============================================================
+   SELECT
+============================================================ */
+
+.input-group select {
+
+    appearance: none;
+
+    cursor: pointer;
+
+    background-image:
+        linear-gradient(
+            45deg,
+            transparent 50%,
+            var(--slate) 50%
+        ),
+        linear-gradient(
+            135deg,
+            var(--slate) 50%,
+            transparent 50%
+        );
+
+    background-position:
+        calc(100% - 17px) 21px,
+        calc(100% - 12px) 21px;
+
+    background-size:
+        5px 5px,
+        5px 5px;
+
+    background-repeat: no-repeat;
+
+}
+
+
+/* ============================================================
+   INPUT FOCUS
+============================================================ */
+
+.input-group input:focus,
+.input-group select:focus {
+
+    border-color: var(--slate);
+
+    background: #fff;
+
+    box-shadow:
+        0 0 0 3px rgba(74,78,105,0.10);
+
+}
+
+
+/* ============================================================
+   LOGIN BUTTON
+============================================================ */
+
+.login-btn,
+.submit-btn {
+
+    width: 100%;
+
+    min-height: 51px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: var(--navy);
+
+    color: var(--white);
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 10px;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    margin-top: 7px;
+
+    transition:
+        transform var(--transition),
+        background var(--transition),
+        box-shadow var(--transition);
+
+}
+
+
+.login-btn:hover,
+.submit-btn:hover {
+
+    background: var(--navy-light);
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 8px 20px rgba(34,34,59,0.18);
+
+}
+
+
+.login-btn:active,
+.submit-btn:active {
+
+    transform: translateY(0);
+
+}
+
+
+.login-btn:disabled,
+.submit-btn:disabled {
+
+    opacity: 0.65;
+
+    cursor: not-allowed;
+
+    transform: none;
+
+}
+
+
+/* ============================================================
+   BUTTON ARROW
+============================================================ */
+
+.button-arrow {
+
+    font-size: 19px;
+
+    line-height: 1;
+
+    transition: transform var(--transition);
+
+}
+
+
+.login-btn:hover .button-arrow,
+.submit-btn:hover .button-arrow {
+
+    transform: translateX(4px);
+
+}
+
+
+/* ============================================================
+   FORM FOOTER
+============================================================ */
+
+.form-footer {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 5px;
+
+    margin-top: 19px;
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+}
+
+
+.form-footer button {
+
+    border: none;
+
+    background: transparent;
+
+    color: var(--navy);
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    padding: 0;
+
+}
+
+
+.form-footer button:hover {
+
+    text-decoration: underline;
+
+}
+
+
+/* ============================================================
+   BACK LINK
+============================================================ */
+
+.back-link {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 6px;
+
+    margin-top: 27px;
+
+    color: var(--slate);
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    transition: var(--transition);
+
+}
+
+
+.back-link:hover {
+
+    color: var(--navy);
+
+}
+
+
+/* ============================================================
+   SECURITY NOTE
+============================================================ */
+
+.security-note {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-top: 20px;
+
+    padding-top: 18px;
+
+    border-top: 1px solid var(--border);
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+}
+
+
+.security-icon {
+
+    width: 17px;
+
+    height: 17px;
+
+    border-radius: 50%;
+
+    background: rgba(77,128,97,0.12);
+
+    color: var(--success);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+}
+
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media (max-width: 700px) {
+
+    .student-page {
+
+        padding: 25px 15px;
+
+    }
+
+
+    .student-container {
+
+        padding: 32px 28px 25px;
+
+        border-radius: 20px;
+
+    }
+
+
+    .form-header {
+
+        gap: 18px;
+
+    }
+
+
+    .logo-wrapper {
+
+        width: 80px;
+
+        height: 80px;
+
+    }
+
+
+    .student-logo {
+
+        width: 63px;
+
+        height: 63px;
+
+    }
+
+
+    .form-header h1 {
+
+        font-size: 29px;
+
+    }
+
+}
+
+
+@media (max-width: 560px) {
+
+    .student-container {
+
+        padding: 28px 20px 23px;
+
+    }
+
+
+    .form-header {
+
+        flex-direction: column;
+
+        text-align: center;
+
+        margin-bottom: 25px;
+
+    }
+
+
+    .header-content {
+
+        width: 100%;
+
+    }
+
+
+    .form-header h1 {
+
+        font-size: 27px;
+
+    }
+
+
+    .portal-label {
+
+        font-size: 10px;
+
+    }
+
+
+    #register-form {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    #register-form .form-heading,
+    #register-form .submit-btn,
+    #register-form .form-footer {
+
+        grid-column: 1;
+
+    }
+
+
+    .form-heading h2 {
+
+        font-size: 22px;
+
+    }
+
+}
+
+
+@media (max-width: 380px) {
+
+    .student-container {
+
+        padding: 24px 16px 20px;
+
+    }
+
+
+    .form-header h1 {
+
+        font-size: 24px;
+
+    }
+
+
+    .tab-btn {
+
+        font-size: 15px;
+
+    }
+
+}

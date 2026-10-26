@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Dashboard - Campus Request Management System</title>
+
+    <link rel="stylesheet" href="student-dashboard.css">
+</head>
+
+<body>
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-header">
+            <h2>Campus Request</h2>
+            <p>Management System</p>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="#" class="nav-item active"
+               onclick="showSection('dashboard', this); return false;">
+                <span>⌂</span>
+                Dashboard
+            </a>
+
+            <a href="#" class="nav-item"
+               onclick="showSection('new-request', this); return false;">
+                <span>✚</span>
+                Enter Request
+            </a>
+
+            <a href="#" class="nav-item"
+               onclick="showSection('progress', this); return false;">
+                <span>◷</span>
+                Request Progress
+            </a>
+
+            <a href="#" class="nav-item"
+               onclick="showSection('history', this); return false;">
+                <span>▤</span>
+                Request History
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="index.html"
+               class="logout-btn"
+               onclick="localStorage.removeItem('token'); localStorage.removeItem('student');">
+                <span>↪</span>
+                Logout
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="main-content">
+
+
+        <!-- ================= TOP HEADER ================= -->
+
+      <!-- ================= TOP HEADER ================= -->
+
+<header class="top-header">
+
+    <!-- Page Title -->
+    <div class="header-title">
+
+        <h1 id="page-title">
+            Student Dashboard
+        </h1>
+
+        <p>
+            Welcome back! Manage and track your campus requests.
+        </p>
+
+    </div>
+
+
+    <!-- ================= RIGHT SIDE ================= -->
+
+    <div class="header-right">
+
+        <!-- ================= NOTIFICATION ================= -->
+
+        <div class="notification-wrapper">
+
+            <button
+                type="button"
+                class="notification-btn"
+                id="notificationBtn"
+                title="Notifications"
+            >
+
+                🔔
+
+                <span
+                    class="notification-badge"
+                    id="notificationBadge"
+                >
+                    0
+                </span>
+
+            </button>
+
+
+            <!-- Notification Dropdown -->
+
+            <div
+                class="notification-dropdown"
+                id="notificationDropdown"
+            >
+
+                <!-- Dropdown Header -->
+
+                <div class="notification-header">
+
+                    <h3>
+                        Notifications
+                    </h3>
+
+                    <button
+                        type="button"
+                        id="markAllReadBtn"
+                        class="mark-read-btn"
+                    >
+                        Mark all as read
+                    </button>
+
+                </div>
+
+
+                <!-- Notification List -->
+
+                <div
+                    id="notificationList"
+                    class="notification-list"
+                >
+
+                    <div class="no-notifications">
+                        No new notifications
+                    </div>
+
+                </div>
+
+
+                <!-- Dropdown Footer -->
+
+                <div class="notification-footer">
+
+                    <button
+                        type="button"
+                        id="viewAllNotifications"
+                    >
+                        View All Notifications
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= STUDENT PROFILE ================= -->
+
+        <div class="student-profile">
+
+            <div
+                class="profile-icon"
+                id="profileIcon"
+            >
+                S
+            </div>
+
+            <div>
+
+                <h3 id="studentName">
+                    Student
+                </h3>
+
+                <p id="studentRoll">
+                    University Roll No.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+        <!-- ================= DASHBOARD SECTION ================= -->
+
+        <section id="dashboard"
+                 class="content-section active-section">
+
+
+            <!-- Welcome Box -->
+
+            <div class="welcome-box">
+
+                <div>
+
+                    <h2>
+                        Welcome to your Dashboard
+                    </h2>
+
+                    <p>
+                        Submit a new request or track the progress
+                        of your existing requests.
+                    </p>
+
+                </div>
+
+                <button onclick="showSectionById('new-request')">
+                    + Enter New Request
+                </button>
+
+            </div>
+
+
+            <!-- ================= STATISTICS ================= -->
+
+            <div class="stats-container">
+
+
+                <!-- Total Requests -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        ▤
+                    </div>
+
+                    <div>
+
+                        <h3 id="totalRequests">
+                            0
+                        </h3>
+
+                        <p>
+                            Total Requests
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Pending -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        ◷
+                    </div>
+
+                    <div>
+
+                        <h3 id="pendingRequests">
+                            0
+                        </h3>
+
+                        <p>
+                            Pending
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- In Progress -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        ↻
+                    </div>
+
+                    <div>
+
+                        <h3 id="inProgressRequests">
+                            0
+                        </h3>
+
+                        <p>
+                            In Progress
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Completed -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <h3 id="completedRequests">
+                            0
+                        </h3>
+
+                        <p>
+                            Completed
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= RECENT REQUESTS ================= -->
+
+            <div class="section-card">
+
+                <div class="section-heading">
+
+                    <h2>
+                        Recent Requests
+                    </h2>
+
+                    <button onclick="showSectionById('history')">
+                        View All
+                    </button>
+
+                </div>
+
+
+                <!-- Requests will be loaded here -->
+
+                <div id="recentRequests"
+                     class="recent-requests">
+
+
+                    <!-- Empty State -->
+
+                    <div id="recentEmptyState"
+                         class="empty-state">
+
+                        <div class="empty-icon">
+                            ▤
+                        </div>
+
+                        <h3>
+                            No Requests Yet
+                        </h3>
+
+                        <p>
+                            You have not submitted any requests.
+                        </p>
+
+                        <button onclick="showSectionById('new-request')">
+                            Submit Your First Request
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= NEW REQUEST SECTION ================= -->
+
+        <section id="new-request"
+                 class="content-section">
+
+            <div class="section-card">
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <h2>
+                            Enter New Request
+                        </h2>
+
+                        <p>
+                            Fill in the details below to submit your request.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Request Form -->
+
+                <form class="request-form"
+                      onsubmit="submitRequest(event)">
+
+
+                    <!-- Request Type + Department -->
+
+                    <div class="form-row">
+
+
+                        <!-- Request Type -->
+
+                        <div class="input-group">
+
+                            <label for="request-type">
+                                Request Type
+                            </label>
+
+                            <select id="request-type" required>
+
+                                <option value="">
+                                    Select Request Type
+                                </option>
+
+                                <option value="Maintenance Request">
+                                    Maintenance Request
+                                </option>
+
+                                <option value="IT Support">
+                                    IT Support
+                                </option>
+
+                                <option value="Hostel Complaint">
+                                    Hostel Complaint
+                                </option>
+
+                                <option value="Transport Request">
+                                    Transport Request
+                                </option>
+
+                                <option value="Academic Request">
+                                    Academic Request
+                                </option>
+
+                                <option value="Cleaning and Housekeeping">
+                                    Cleaning and Housekeeping
+                                </option>
+
+                                <option value="Others">
+                                    Others
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- Department -->
+
+                        <div class="input-group">
+
+                            <label for="department">
+                                Department
+                            </label>
+
+                            <select id="department" required>
+
+                                <option value="">
+                                    Select Department
+                                </option>
+
+                                <option value="1">
+                                    Engineering
+                                </option>
+
+                                <option value="2">
+                                    Hotel Management
+                                </option>
+
+                                <option value="3">
+                                    Pharmacy
+                                </option>
+
+                                <option value="4">
+                                    Management and Technology
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Subject -->
+
+                    <div class="input-group">
+
+                        <label for="request-subject">
+                            Request Subject
+                        </label>
+
+                        <input
+                            type="text"
+                            id="request-subject"
+                            placeholder="Enter the subject of your request"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Description -->
+
+                    <div class="input-group">
+
+                        <label for="request-description">
+                            Request Description
+                        </label>
+
+                        <textarea
+                            id="request-description"
+                            rows="6"
+                            placeholder="Describe your request in detail..."
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+                    <!-- Submit -->
+
+                    <button type="submit"
+                            class="submit-btn">
+                        Submit Request
+                    </button>
+
+                </form>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= PROGRESS SECTION ================= -->
+
+        <section id="progress"
+                 class="content-section">
+
+            <div class="section-card">
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <h2>
+                            Request Progress
+                        </h2>
+
+                        <p>
+                            Track the current status of your requests.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="request-table-container">
+
+                    <table class="request-table">
+
+                        <thead>
+
+    <tr>
+
+        <th>
+            Request ID
+        </th>
+
+        <th>
+            Subject
+        </th>
+
+        <th>
+            Department
+        </th>
+
+        <th>
+            Date
+        </th>
+
+        <th>
+            Status
+        </th>
+
+        <th>
+            Staff Response
+        </th>
+
+    </tr>
+
+</thead>
+
+
+                        <tbody id="progressRequestsBody">
+
+                            <tr>
+
+                                <td colspan="6"
+                                    class="no-data">
+
+                                    No active requests found.
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= HISTORY SECTION ================= -->
+
+        <section id="history"
+                 class="content-section">
+
+            <div class="section-card">
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <h2>
+                            Request History
+                        </h2>
+
+                        <p>
+                            View all your previously submitted requests.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="request-table-container">
+
+                    <table class="request-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Request ID
+                                </th>
+
+                                <th>
+                                    Subject
+                                </th>
+
+                                <th>
+                                    Department
+                                </th>
+
+                                <th>
+                                    Submitted On
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="historyRequestsBody">
+
+                            <tr>
+
+                                <td colspan="6"
+                                    class="no-data">
+
+                                    No request history available.
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script src="student-dashboard.js"></script>
+
+</body>
+
+</html>

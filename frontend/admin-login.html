@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Login - Campus Request Management System</title>
+
+    <link rel="stylesheet"
+          href="admin-login.css">
+
+</head>
+
+<body>
+
+    <!-- ================= ADMIN LOGIN CONTAINER ================= -->
+
+    <div class="login-container">
+
+
+        <!-- ================= LOGIN CARD ================= -->
+
+        <div class="login-card">
+
+
+            <!-- Logo / Icon -->
+
+            <div class="login-icon">
+                🔐
+            </div>
+
+
+            <!-- Heading -->
+
+            <h1>
+                Admin Portal
+            </h1>
+
+            <p class="login-subtitle">
+                Campus Request Management System
+            </p>
+
+            <p class="login-description">
+                Authorized administrators only
+            </p>
+
+
+            <!-- ================= LOGIN FORM ================= -->
+
+            <form id="admin-login-form">
+
+
+                <!-- Email -->
+
+                <div class="input-group">
+
+                    <label for="admin-email">
+                        Admin Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="admin-email"
+                        name="email"
+                        placeholder="Enter admin email"
+                        required
+                        autocomplete="username"
+                    >
+
+                </div>
+
+
+                <!-- Password -->
+
+                <div class="input-group">
+
+                    <label for="admin-password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="admin-password"
+                        name="password"
+                        placeholder="Enter your password"
+                        required
+                        autocomplete="current-password"
+                    >
+
+                </div>
+
+
+                <!-- Login Button -->
+
+                <button
+                    type="submit"
+                    class="login-btn"
+                    id="adminLoginBtn"
+                >
+                    Login to Admin Portal
+                </button>
+
+
+                <!-- Error Message -->
+
+                <p
+                    id="login-error"
+                    class="login-error"
+                ></p>
+
+
+            </form>
+
+
+            <!-- ================= SECURITY MESSAGE ================= -->
+
+            <div class="security-message">
+
+                <span>🔒</span>
+
+                <p>
+                    This portal is restricted to authorized
+                    administrators only.
+                </p>
+
+            </div>
+
+
+            <!-- ================= BACK ================= -->
+
+            <a href="index.html"
+               class="back-link">
+
+                ← Back to Main Portal
+
+            </a>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script src="admin-login.js"></script>
+
+</body>
+
+</html>

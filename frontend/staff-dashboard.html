@@ -1,0 +1,1690 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Staff Dashboard - Campus Request Management System
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="staff-dashboard.css">
+
+</head>
+
+
+<body>
+
+<div class="staff-app">
+
+
+    <!-- =====================================================
+         SIDEBAR
+         ===================================================== -->
+
+    <aside class="staff-sidebar">
+
+        <div class="staff-brand">
+
+            <div class="staff-brand-icon">
+                S
+            </div>
+
+            <div>
+
+                <h2>
+                    Campus RMS
+                </h2>
+
+                <span>
+                    Staff Portal
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <nav class="staff-navigation">
+
+            <button
+                class="staff-nav-item active"
+                data-section="dashboard">
+
+                <span>⌂</span>
+
+                Dashboard
+
+            </button>
+
+
+            <button
+                class="staff-nav-item"
+                data-section="requests">
+
+                <span>▣</span>
+
+                Requests
+
+            </button>
+
+
+            <button
+                class="staff-nav-item"
+                data-section="tasks">
+
+                <span>✓</span>
+
+                My Tasks
+
+            </button>
+
+
+            <button
+                class="staff-nav-item"
+                data-section="analytics">
+
+                <span>◫</span>
+
+                Analytics
+
+            </button>
+
+
+            <button
+                class="staff-nav-item"
+                data-section="notifications">
+
+                <span>♢</span>
+
+                Notifications
+
+                <span
+                    id="sidebarNotificationBadge"
+                    class="sidebar-badge hidden">
+                    0
+                </span>
+
+            </button>
+
+
+            <button
+                class="staff-nav-item"
+                data-section="profile">
+
+                <span>◯</span>
+
+                Profile
+
+            </button>
+
+        </nav>
+
+
+        <div class="staff-sidebar-bottom">
+
+            <button
+                id="logoutButton"
+                class="staff-logout-button">
+
+                <span>↪</span>
+
+                Logout
+
+            </button>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
+
+    <main class="staff-main">
+
+
+        <!-- HEADER -->
+
+        <header class="staff-header">
+
+            <div>
+
+                <h1 id="pageTitle">
+                    Dashboard
+                </h1>
+
+                <p id="pageSubtitle">
+                    Overview of your department requests
+                </p>
+
+            </div>
+
+
+            <div class="staff-header-right">
+
+
+                <!-- NOTIFICATION -->
+
+                <div class="staff-notification-wrapper">
+
+                    <button
+                        id="notificationButton"
+                        class="staff-notification-button"
+                        title="Notifications">
+
+                        🔔
+
+                        <span
+                            id="notificationBadge"
+                            class="notification-badge hidden">
+                            0
+                        </span>
+
+                    </button>
+
+
+                    <div
+                        id="notificationDropdown"
+                        class="notification-dropdown">
+
+                        <div class="notification-dropdown-header">
+
+                            <h3>
+                                Notifications
+                            </h3>
+
+                            <button
+                                id="markAllNotificationsRead">
+                                Mark all as read
+                            </button>
+
+                        </div>
+
+
+                        <div
+                            id="notificationList"
+                            class="notification-list">
+
+                            <div class="empty-notification">
+                                No notifications
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PROFILE -->
+
+                <button
+                    id="headerProfileButton"
+                    class="staff-header-profile">
+
+                    <div
+                        id="headerProfileAvatar"
+                        class="staff-avatar">
+                        S
+                    </div>
+
+                    <div>
+
+                        <strong id="headerStaffName">
+                            Staff
+                        </strong>
+
+                        <span id="headerStaffDepartment">
+                            Department
+                        </span>
+
+                    </div>
+
+                </button>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =====================================================
+             DASHBOARD
+             ===================================================== -->
+
+        <section
+            id="section-dashboard"
+            class="staff-section active">
+
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        Dashboard Overview
+                    </h2>
+
+                    <p>
+                        Monitor and process requests from your department.
+                    </p>
+
+                </div>
+
+                <button
+                    class="primary-action"
+                    data-section-target="requests">
+
+                    View Requests →
+
+                </button>
+
+            </div>
+
+
+            <!-- KPI -->
+
+            <div class="staff-stat-grid">
+
+
+                <div class="staff-stat-card">
+
+                    <span>
+                        Total Requests
+                    </span>
+
+                    <strong id="totalRequests">
+                        0
+                    </strong>
+
+                    <small>
+                        Department total
+                    </small>
+
+                </div>
+
+
+                <div class="staff-stat-card">
+
+                    <span>
+                        New Requests
+                    </span>
+
+                    <strong id="newRequests">
+                        0
+                    </strong>
+
+                    <small>
+                        Awaiting action
+                    </small>
+
+                </div>
+
+
+                <div class="staff-stat-card">
+
+                    <span>
+                        Pending
+                    </span>
+
+                    <strong id="pendingRequests">
+                        0
+                    </strong>
+
+                    <small>
+                        New + accepted
+                    </small>
+
+                </div>
+
+
+                <div class="staff-stat-card">
+
+                    <span>
+                        In Progress
+                    </span>
+
+                    <strong id="inProgressRequests">
+                        0
+                    </strong>
+
+                    <small>
+                        Currently processing
+                    </small>
+
+                </div>
+
+
+                <div class="staff-stat-card">
+
+                    <span>
+                        Completed
+                    </span>
+
+                    <strong id="completedRequests">
+                        0
+                    </strong>
+
+                    <small>
+                        Successfully resolved
+                    </small>
+
+                </div>
+
+
+                <div class="staff-stat-card">
+
+                    <span>
+                        Rejected
+                    </span>
+
+                    <strong id="rejectedRequests">
+                        0
+                    </strong>
+
+                    <small>
+                        Closed as rejected
+                    </small>
+
+                </div>
+
+
+                <div class="staff-stat-card highlight">
+
+                    <span>
+                        Today's Requests
+                    </span>
+
+                    <strong id="todayRequests">
+                        0
+                    </strong>
+
+                    <small>
+                        Submitted today
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- RECENT ACTIVITY -->
+
+            <div class="dashboard-panel">
+
+                <div class="panel-heading">
+
+                    <div>
+
+                        <h3>
+                            Recent Activity
+                        </h3>
+
+                        <p>
+                            Recently created or updated requests.
+                        </p>
+
+                    </div>
+
+                    <button
+                        class="text-action"
+                        data-section-target="requests">
+
+                        View all
+
+                    </button>
+
+                </div>
+
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    ID
+                                </th>
+
+                                <th>
+                                    Student
+                                </th>
+
+                                <th>
+                                    Subject
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                                <th>
+                                    Updated
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody
+                            id="recentRequestsBody">
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             REQUESTS
+             ===================================================== -->
+
+        <section
+            id="section-requests"
+            class="staff-section">
+
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        Request Management
+                    </h2>
+
+                    <p>
+                        Search, filter and process departmental requests.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- FILTERS -->
+
+            <div class="filter-panel">
+
+                <div class="filter-search">
+
+                    <input
+                        id="requestSearch"
+                        type="search"
+                        placeholder="Search ID, student, roll number, subject...">
+
+                </div>
+
+
+                <select id="requestStatusFilter">
+
+                    <option value="">
+                        All Statuses
+                    </option>
+
+                    <option value="New">
+                        New
+                    </option>
+
+                    <option value="Accepted">
+                        Accepted
+                    </option>
+
+                    <option value="In Progress">
+                        In Progress
+                    </option>
+
+                    <option value="Completed">
+                        Completed
+                    </option>
+
+                    <option value="Rejected">
+                        Rejected
+                    </option>
+
+                </select>
+
+
+                <select id="requestTypeFilter">
+
+                    <option value="">
+                        All Types
+                    </option>
+
+                </select>
+
+
+               <div class="filter-date-field">
+
+    <label for="requestDateFilter">
+        
+    </label>
+
+    <input
+        type="date"
+        id="requestDateFilter"
+    >
+
+</div>
+
+
+              
+
+
+                <select id="requestSort">
+
+                    <option value="newest">
+                        Newest
+                    </option>
+
+                    <option value="oldest">
+                        Oldest
+                    </option>
+
+                    <option value="updated">
+                        Recently Updated
+                    </option>
+
+                    <option value="request_id">
+                        Request ID
+                    </option>
+
+                    <option value="student">
+                        Student Name
+                    </option>
+
+                </select>
+
+
+                <button
+    type="button"
+    id="staffRequestReset"
+>
+    Reset
+</button>
+
+            </div>
+
+
+            <!-- REQUEST TABLE -->
+
+            <div class="dashboard-panel">
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    ID
+                                </th>
+
+                                <th>
+                                    Student
+                                </th>
+
+                                <th>
+                                    Roll No.
+                                </th>
+
+                                <th>
+                                    Type
+                                </th>
+
+                                <th>
+                                    Subject
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                                <th>
+                                    Created
+                                </th>
+
+                                <th>
+                                    Action
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody
+                            id="staffRequestsBody">
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+                <div
+                    id="requestPagination"
+                    class="pagination">
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             MY TASKS
+             ===================================================== -->
+
+        <section
+            id="section-tasks"
+            class="staff-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        My Tasks
+                    </h2>
+
+                    <p>
+                        Your department's current work queue.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="task-grid">
+
+                <button
+                    class="task-card"
+                    data-task-status="New">
+
+                    <strong id="taskNew">
+                        0
+                    </strong>
+
+                    <span>
+                        New Tasks
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="task-card"
+                    data-task-status="Accepted">
+
+                    <strong id="taskAccepted">
+                        0
+                    </strong>
+
+                    <span>
+                        Accepted
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="task-card"
+                    data-task-status="In Progress">
+
+                    <strong id="taskProgress">
+                        0
+                    </strong>
+
+                    <span>
+                        In Progress
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="task-card"
+                    data-task-status="Completed">
+
+                    <strong id="taskCompleted">
+                        0
+                    </strong>
+
+                    <span>
+                        Completed
+                    </span>
+
+                </button>
+
+            </div>
+
+
+            <div class="dashboard-panel">
+
+                <div class="panel-heading">
+
+                    <div>
+
+                        <h3>
+                            Work Queue
+                        </h3>
+
+                        <p>
+                            Click a task category to open filtered requests.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div
+                    id="taskSummary"
+                    class="task-summary">
+
+                    Select a task category above.
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             ANALYTICS
+             ===================================================== -->
+
+        <section
+            id="section-analytics"
+            class="staff-section">
+
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        Analytics Center
+                    </h2>
+
+                    <p>
+                        Department request trends and processing performance.
+                    </p>
+
+                </div>
+
+
+                <select
+                    id="analyticsRange"
+                    class="analytics-range">
+
+                    <option value="7">
+                        Last 7 Days
+                    </option>
+
+                    <option
+                        value="30"
+                        selected>
+                        Last 30 Days
+                    </option>
+
+                    <option value="90">
+                        Last 3 Months
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="analytics-kpis">
+
+                <div class="analytics-kpi">
+
+                    <span>
+                        Requests
+                    </span>
+
+                    <strong
+                        id="analyticsRequests">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="analytics-kpi">
+
+                    <span>
+                        Completed
+                    </span>
+
+                    <strong
+                        id="analyticsCompleted">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="analytics-kpi">
+
+                    <span>
+                        Completion Rate
+                    </span>
+
+                    <strong
+                        id="analyticsCompletionRate">
+                        0%
+                    </strong>
+
+                </div>
+
+
+                <div class="analytics-kpi">
+
+                    <span>
+                        Avg. Processing
+                    </span>
+
+                    <strong
+                        id="analyticsAverageTime">
+                        —
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="analytics-grid">
+
+
+                <div class="analytics-card wide">
+
+                    <div class="panel-heading">
+
+                        <div>
+
+                            <h3>
+                                Request Trend
+                            </h3>
+
+                            <p>
+                                Daily request volume
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <canvas
+                        id="requestTrendChart"
+                        height="180">
+                    </canvas>
+
+                </div>
+
+<!-- =========================================================
+     STATUS DISTRIBUTION
+     ========================================================= -->
+
+<div class="analytics-card status-distribution-card">
+
+    <div class="analytics-card-header">
+
+        <div>
+
+            <h3>Status Distribution</h3>
+
+            <p>Current department workload</p>
+
+        </div>
+
+    </div>
+
+
+    <div class="status-pie-container">
+
+        <div
+            id="statusPieChart"
+            class="status-pie-chart">
+
+            <div
+                id="statusPieTotal"
+                class="status-pie-total">
+
+                <strong>0</strong>
+
+                <span>Requests</span>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="statusPieLegend"
+            class="status-pie-legend">
+        </div>
+
+    </div>
+
+</div>
+
+
+                <div class="analytics-card">
+
+                    <div class="panel-heading">
+
+                        <div>
+
+                            <h3>
+                                Request Types
+                            </h3>
+
+                            <p>
+                                Most common categories
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div
+                        id="typeAnalytics"
+                        class="bar-list">
+
+                    </div>
+
+                </div>
+
+
+                <div class="analytics-card">
+
+                    <div class="panel-heading">
+
+                        <div>
+
+                            <h3>
+                                Processing Performance
+                            </h3>
+
+                            <p>
+                                Completed request timing
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="performance-list">
+
+                        <div>
+
+                            <span>
+                                Average
+                            </span>
+
+                            <strong
+                                id="averageProcessing">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Fastest
+                            </span>
+
+                            <strong
+                                id="fastestProcessing">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Slowest
+                            </span>
+
+                            <strong
+                                id="slowestProcessing">
+                                —
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="analytics-card">
+
+                    <div class="panel-heading">
+
+                        <div>
+
+                            <h3>
+                                Peak Request Hours
+                            </h3>
+
+                            <p>
+                                Highest submission periods
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="peakHours"
+                        class="peak-hours">
+
+                    </div>
+
+                </div>
+
+
+                <div class="analytics-card wide">
+
+                    <div class="panel-heading">
+
+                        <div>
+
+                            <h3>
+                                Recently Completed
+                            </h3>
+
+                            <p>
+                                Latest successfully resolved requests
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="recentCompleted"
+                        class="completed-list">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             NOTIFICATIONS
+             ===================================================== -->
+
+        <section
+            id="section-notifications"
+            class="staff-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        Notifications
+                    </h2>
+
+                    <p>
+                        Updates related to your department requests.
+                    </p>
+
+                </div>
+
+
+                <button
+                    id="pageMarkAllRead"
+                    class="secondary-action">
+
+                    Mark all as read
+
+                </button>
+
+            </div>
+
+
+            <div
+                id="fullNotificationList"
+                class="full-notification-list">
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             PROFILE
+             ===================================================== -->
+
+        <section
+            id="section-profile"
+            class="staff-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        Staff Profile
+                    </h2>
+
+                    <p>
+                        Your staff account information.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="profile-grid">
+
+                <div class="profile-card">
+
+                    <div
+                        id="profileAvatar"
+                        class="large-profile-avatar">
+                        S
+                    </div>
+
+
+                    <h2 id="profileName">
+                        Staff
+                    </h2>
+
+
+                    <p id="profileDesignation">
+                        Staff Member
+                    </p>
+
+
+                    <span
+                        id="profileStatus"
+                        class="status-badge completed">
+                        Active
+                    </span>
+
+                </div>
+
+
+                <div class="profile-information">
+
+                    <div class="profile-info-row">
+
+                        <span>
+                            Staff ID
+                        </span>
+
+                        <strong id="profileStaffId">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="profile-info-row">
+
+                        <span>
+                            Official Email
+                        </span>
+
+                        <strong id="profileEmail">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="profile-info-row">
+
+                        <span>
+                            Department
+                        </span>
+
+                        <strong id="profileDepartment">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="profile-info-row">
+
+                        <span>
+                            Designation
+                        </span>
+
+                        <strong id="profileDesignationInfo">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <button
+                        id="profileChangePassword"
+                        class="primary-action">
+
+                        Change Password
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+
+<!-- =========================================================
+     REQUEST DETAILS MODAL
+     ========================================================= -->
+
+<div
+    id="requestModal"
+    class="modal-overlay">
+
+    <div class="request-modal">
+
+        <button
+            id="closeRequestModal"
+            class="modal-close">
+
+            ×
+
+        </button>
+
+
+        <div class="modal-header">
+
+            <div>
+
+                <span>
+                    Request Details
+                </span>
+
+                <h2 id="modalRequestTitle">
+                    Request #—
+                </h2>
+
+            </div>
+
+            <span
+                id="modalStatusBadge"
+                class="status-badge">
+                New
+            </span>
+
+        </div>
+
+
+        <div class="request-detail-grid">
+
+            <div>
+
+                <label>
+                    Student
+                </label>
+
+                <strong
+                    id="modalStudentName">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <label>
+                    Roll Number
+                </label>
+
+                <strong
+                    id="modalRollNumber">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <label>
+                    Department
+                </label>
+
+                <strong
+                    id="modalDepartment">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <label>
+                    Request Type
+                </label>
+
+                <strong
+                    id="modalRequestType">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <label>
+                    Created
+                </label>
+
+                <strong
+                    id="modalCreatedAt">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <label>
+                    Last Updated
+                </label>
+
+                <strong
+                    id="modalUpdatedAt">
+                    —
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="modal-description">
+
+            <label>
+                Subject
+            </label>
+
+            <h3 id="modalSubject">
+                —
+            </h3>
+
+
+            <label>
+                Description
+            </label>
+
+            <p id="modalDescription">
+                —
+            </p>
+
+        </div>
+
+
+        <div class="modal-response">
+
+            <label>
+                Staff Response
+            </label>
+
+            <textarea
+                id="modalResponse"
+                rows="5"
+                placeholder="Write a response for the student...">
+            </textarea>
+
+        </div>
+
+
+        <div class="modal-status">
+
+            <label>
+                Update Status
+            </label>
+
+            <select id="modalStatus">
+
+                <option value="New">
+                    New
+                </option>
+
+                <option value="Accepted">
+                    Accepted
+                </option>
+
+                <option value="In Progress">
+                    In Progress
+                </option>
+
+                <option value="Completed">
+                    Completed
+                </option>
+
+                <option value="Rejected">
+                    Rejected
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div
+            id="modalTimeline"
+            class="request-timeline">
+
+        </div>
+
+
+        <div
+            id="modalMessage"
+            class="modal-message">
+
+        </div>
+
+
+        <div class="modal-actions">
+
+            <button
+                id="cancelRequestModal"
+                class="secondary-action">
+
+                Close
+
+            </button>
+
+
+            <button
+                id="saveRequestButton"
+                class="primary-action">
+
+                Save Changes
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     CHANGE PASSWORD MODAL
+     ========================================================= -->
+
+<div
+    id="passwordModal"
+    class="modal-overlay">
+
+    <div class="password-modal">
+
+        <div class="password-modal-header">
+
+            <div class="password-lock-icon">
+                🔐
+            </div>
+
+            <h2>
+                Change Your Password
+            </h2>
+
+            <p id="passwordModalDescription">
+                For security, please change your temporary password.
+            </p>
+
+        </div>
+
+
+        <form id="changePasswordForm">
+
+
+            <div class="password-field">
+
+                <label>
+                    Current Password
+                </label>
+
+                <input
+                    type="password"
+                    id="currentPassword"
+                    required>
+
+            </div>
+
+
+            <div class="password-field">
+
+                <label>
+                    New Password
+                </label>
+
+                <input
+                    type="password"
+                    id="newPassword"
+                    required>
+
+            </div>
+
+
+            <div class="password-strength">
+
+                <div
+                    class="strength-bar"
+                    id="strengthBar">
+                </div>
+
+                <span id="strengthText">
+                    Enter a password
+                </span>
+
+            </div>
+
+
+            <div class="password-field">
+
+                <label>
+                    Confirm New Password
+                </label>
+
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    required>
+
+            </div>
+
+
+            <div
+                id="passwordMatch"
+                class="password-match">
+            </div>
+
+
+            <div
+                id="passwordChangeMessage"
+                class="modal-message">
+            </div>
+
+
+            <button
+                type="submit"
+                id="changePasswordButton"
+                class="primary-action full-button">
+
+                Change Password
+
+            </button>
+
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<script src="staff-dashboard.js"></script>
+
+</body>
+
+</html>
