@@ -101,7 +101,7 @@ async function loadDashboardStatistics() {
 
 
         const response = await fetch(
-            "campus-request-management-backend.onrender.com/api/admin/dashboard/stats",
+            "https://campus-request-management-backend.onrender.com/api/admin/dashboard/stats",
             {
                 method: "GET",
 
