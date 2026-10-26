@@ -6,7 +6,7 @@
 
 // ================= BACKEND URL =================
 
-const API_URL = "http://localhost:5000";
+const API_URL = "https://campus-request-management-backend.onrender.com";
 
 
 // ================= LOGIN FORM =================

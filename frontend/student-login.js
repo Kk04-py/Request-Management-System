@@ -48,7 +48,7 @@ if(loginForm){
 
         try{
 
-            const response=await fetch("http://localhost:5000/api/student/login",{
+            const response=await fetch("https://campus-request-management-backend.onrender.com/api/student/login",{
 
                 method:"POST",
 
@@ -130,7 +130,7 @@ async function studentRegister(event){
 
     try{
 
-        const response=await fetch("http://localhost:5000/api/student/register",{
+        const response=await fetch("https://campus-request-management-backend.onrender.com/api/student/register",{
 
             method:"POST",
 

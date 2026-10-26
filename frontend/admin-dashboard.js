@@ -101,7 +101,7 @@ async function loadDashboardStatistics() {
 
 
         const response = await fetch(
-            "http://localhost:5000/api/admin/dashboard/stats",
+            "campus-request-management-backend.onrender.com/api/admin/dashboard/stats",
             {
                 method: "GET",
 
@@ -272,8 +272,9 @@ async function loadAdminRequests() {
 
 
         const response = await fetch(
-            "http://localhost:5000/api/admin/requests",
+            "https://campus-request-management-backend.onrender.com/api/admin/requests",
             {
+                
                 method: "GET",
 
                 headers: {
@@ -1769,7 +1770,7 @@ async function loadStudents() {
         const queryString = params.toString();
 
         const url =
-            `http://localhost:5000/api/admin/students` +
+            `https://campus-request-management-backend.onrender.com/api/admin/students` +
             (queryString ? `?${queryString}` : "");
 
 
@@ -1988,7 +1989,7 @@ async function loadStudentDepartments() {
 
 
         const response = await fetch(
-            "http://localhost:5000/api/admin/departments",
+            "https://campus-request-management-backend.onrender.com/api/admin/departments",
             {
                 method: "GET",
 
@@ -2115,7 +2116,7 @@ async function viewStudent(studentId) {
 
 
         const response = await fetch(
-            `http://localhost:5000/api/admin/students/${studentId}`,
+            `https://campus-request-management-backend.onrender.com/api/admin/students/${studentId}`,
             {
                 method: "GET",
 
@@ -2635,7 +2636,7 @@ async function viewRequest(requestId) {
 
 
         const response = await fetch(
-            `http://localhost:5000/api/admin/requests/${requestId}`,
+            `https://campus-request-management-backend.onrender.com/api/admin/requests/${requestId}`,
             {
                 method: "GET",
 
@@ -3166,7 +3167,7 @@ async function saveRequestUpdate() {
 
         const response = await fetch(
 
-            `http://localhost:5000/api/admin/requests/${requestId}`,
+            `https://campus-request-management-backend.onrender.com/api/admin/requests/${requestId}`,
 
             {
                 method: "PUT",
@@ -3875,7 +3876,7 @@ async function saveStaff(event) {
 
         const response =
             await fetch(
-                "http://localhost:5000/api/admin/staff",
+                "https://campus-request-management-backend.onrender.com/api/admin/staff",
                 {
                     method: "POST",
 
@@ -4005,7 +4006,7 @@ async function loadStaff() {
 
         const response =
             await fetch(
-                "http://localhost:5000/api/admin/staff",
+                "https://campus-request-management-backend.onrender.com/api/admin/staff",
                 {
                     method: "GET",
 
@@ -4314,7 +4315,7 @@ async function toggleStaffStatus(
 
         const response =
             await fetch(
-                `http://localhost:5000/api/admin/staff/${staffId}/status`,
+                `https://campus-request-management-backend.onrender.com/api/admin/staff/${staffId}/status`,
                 {
                     method: "PUT",
 
@@ -4668,7 +4669,7 @@ async function loadAdminNotifications() {
     try {
 
         const response = await fetch(
-            "http://localhost:5000/api/notifications/admin",
+            "https://campus-request-management-backend.onrender.com/api/notifications/admin",
             {
                 method: "GET",
 
@@ -4904,7 +4905,7 @@ async function markAdminNotificationRead(
 
         const response = await fetch(
 
-            `http://localhost:5000/api/notifications/${notificationId}/read`,
+            `https://campus-request-management-backend.onrender.com/api/notifications/${notificationId}/read`,
 
             {
                 method: "PUT",
@@ -4963,7 +4964,7 @@ if (adminMarkAllReadBtn) {
 
                 const notificationsResponse =
                     await fetch(
-                        "http://localhost:5000/api/notifications/admin",
+                        "https://campus-request-management-backend.onrender.com/api/notifications/admin",
                         {
                             method: "GET",
 
@@ -4996,7 +4997,7 @@ if (adminMarkAllReadBtn) {
                 ) {
 
                     await fetch(
-                        `http://localhost:5000/api/notifications/${notification.id}/read`,
+                        `https://campus-request-management-backend.onrender.com/api/notifications/${notification.id}/read`,
                         {
                             method: "PUT",
 
@@ -5136,7 +5137,7 @@ async function fetchAdminResource(path) {
         throw new Error("Your admin session has expired. Please log in again.");
     }
 
-    const response = await fetch(`http://localhost:5000/api${path}`, {
+    const response = await fetch(`https://campus-request-management-backend.onrender.com/api${path}`, {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` }
     });

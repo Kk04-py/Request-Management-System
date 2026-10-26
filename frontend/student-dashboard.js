@@ -202,7 +202,7 @@ async function submitRequest(event) {
     try {
 
         const response = await fetch(
-            "http://localhost:5000/api/student/requests",
+            "https://campus-request-management-backend.onrender.com/api/student/requests",
             {
                 method: "POST",
 
@@ -336,7 +336,7 @@ async function loadRequestStatistics() {
 
         const response =
             await fetch(
-                "http://localhost:5000/api/student/requests",
+                "https://campus-request-management-backend.onrender.com/api/student/requests",
                 {
                     method: "GET",
 
@@ -464,7 +464,7 @@ async function loadStudentRequests() {
 
         const response =
             await fetch(
-                "http://localhost:5000/api/student/requests",
+                "https://campus-request-management-backend.onrender.com/api/student/requests",
                 {
                     method: "GET",
 
@@ -1252,7 +1252,7 @@ async function loadNotifications() {
     }
 
     const notificationUrl =
-        `http://localhost:5000/api/notifications/student/${studentId}`;
+        `https://campus-request-management-backend.onrender.com/api/notifications/student/${studentId}`;
 
     console.log(
         "NOTIFICATION URL:",
@@ -1452,7 +1452,7 @@ async function markNotificationRead(
 
         const response =
             await fetch(
-                `http://localhost:5000/api/notifications/${notificationId}/read`,
+                `https://campus-request-management-backend.onrender.com/api/notifications/${notificationId}/read`,
                 {
 
                     method: "PUT",
@@ -1515,7 +1515,7 @@ if (markAllReadBtn) {
 
                 const response =
                     await fetch(
-                        `http://localhost:5000/api/notifications/student/${studentId}/read-all`,
+                        `https://campus-request-management-backend.onrender.com/api/notifications/student/${studentId}/read-all`,
                         {
 
                             method: "PUT",

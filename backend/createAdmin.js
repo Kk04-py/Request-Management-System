@@ -3,9 +3,9 @@ const db = require("./db");
 
 async function createAdmin() {
     try {
-        const name = "System Administrator";
-        const email = "admin@college.edu";
-        const password = "Admin@2026";
+        const name = process.env.ADMIN_NAME;
+const email = process.env.ADMIN_EMAIL;
+const password = process.env.ADMIN_PASSWORD;
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
