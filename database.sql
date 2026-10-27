@@ -1,4 +1,3 @@
-CREATE DATABASE campus_request_management;
 USE campus_request_management;
 CREATE TABLE departments (
     department_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -77,4 +76,55 @@ CREATE TABLE notifications (
         ON DELETE CASCADE
 );
 
+CREATE TABLE IF NOT EXISTS admins (
+    admin_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(150) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+describe admins;
+SELECT admin_id, name, email, created_at
+FROM admins;
+show tables;
 
+SELECT COUNT(*) AS total_students
+FROM students;
+
+SELECT * FROM departments;
+DESCRIBE departments;
+
+SHOW CREATE TABLE departments;
+SELECT * FROM requests;
+
+SELECT * FROM staff;
+
+DESCRIBE notifications;
+SELECT * FROM notifications LIMIT 5;
+
+SELECT *
+FROM notifications
+ORDER BY created_at DESC
+LIMIT 10;
+
+DESCRIBE staff;
+
+ALTER TABLE staff
+ADD COLUMN status VARCHAR(20) NOT NULL DEFAULT 'Active';
+
+DESCRIBE staff;
+
+SELECT *
+FROM notifications
+ORDER BY created_at DESC
+LIMIT 10;
+
+SELECT *
+FROM requests
+ORDER BY request_id DESC
+LIMIT 5;
+
+ALTER TABLE notifications
+    MODIFY COLUMN student_id INT NULL,
+    ADD COLUMN admin_id INT NULL,
+    ADD COLUMN staff_id INT NULL;

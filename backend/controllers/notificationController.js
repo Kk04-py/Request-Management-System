@@ -11,107 +11,46 @@ const createStudentNotification = async ({
     message,
     type = "request_update"
 }) => {
-
-    if (
-        !student_id ||
-        !request_id ||
-        !message
-    ) {
-
+    if (!student_id || !request_id || !message) {
         throw new Error(
             "student_id, request_id and message are required"
         );
-
     }
 
-
-    const [result] =
-        await db.execute(
-            `
-            INSERT INTO notifications
-            (
-                student_id,
-                admin_id,
-                staff_id,
-                request_id,
-                message,
-                type
-            )
-            VALUES
-            (?, NULL, NULL, ?, ?, ?)
-            `,
-            [
-                student_id,
-                request_id,
-                message,
-                type
-            ]
-        );
-
+    const [result] = await db.execute(
+        `INSERT INTO notifications
+            (student_id, request_id, message, type)
+         VALUES (?, ?, ?, ?)`,
+        [student_id, request_id, message, type]
+    );
 
     return result.insertId;
-
 };
-
-
-
 // =========================================================
 // CREATE ADMIN NOTIFICATIONS
 // =========================================================
+
 
 const createAdminNotifications = async ({
     request_id,
     message,
     type = "new_request"
 }) => {
-
-    if (
-        !request_id ||
-        !message
-    ) {
-
+    if (!request_id || !message) {
         throw new Error(
             "request_id and message are required"
         );
-
     }
 
+    const [admins] = await db.execute(
+        "SELECT admin_id FROM admins"
+    );
 
-    const [admins] =
+    for (const admin of admins) {
         await db.execute(
-            `
-            SELECT admin_id
-            FROM admins
-            `
-        );
-
-
-    for (
-        const admin
-        of admins
-    ) {
-
-        await db.execute(
-            `
-            INSERT INTO notifications
-            (
-                student_id,
-                admin_id,
-                staff_id,
-                request_id,
-                message,
-                type
-            )
-            VALUES
-            (
-                NULL,
-                ?,
-                NULL,
-                ?,
-                ?,
-                ?
-            )
-            `,
+            `INSERT INTO notifications
+                (student_id, admin_id, staff_id, request_id, message, type)
+             VALUES (NULL, ?, NULL, ?, ?, ?)`,
             [
                 admin.admin_id,
                 request_id,
@@ -119,11 +58,8 @@ const createAdminNotifications = async ({
                 type
             ]
         );
-
     }
-
 };
-
 
 
 // =========================================================
@@ -136,67 +72,24 @@ const createStaffNotifications = async ({
     message,
     type = "new_request"
 }) => {
-
-    if (
-        !department_id ||
-        !request_id ||
-        !message
-    ) {
-
+    if (!department_id || !request_id || !message) {
         throw new Error(
             "department_id, request_id and message are required"
         );
-
     }
 
+    const [staffMembers] = await db.execute(
+        `SELECT staff_id
+         FROM staff
+         WHERE department_id = ?`,
+        [department_id]
+    );
 
-    const [staffMembers] =
+    for (const staff of staffMembers) {
         await db.execute(
-            `
-            SELECT
-                staff_id
-            FROM staff
-            WHERE department_id = ?
-            `,
-            [department_id]
-        );
-
-
-    if (
-        staffMembers.length === 0
-    ) {
-
-        return;
-
-    }
-
-
-    for (
-        const staff
-        of staffMembers
-    ) {
-
-        await db.execute(
-            `
-            INSERT INTO notifications
-            (
-                student_id,
-                admin_id,
-                staff_id,
-                request_id,
-                message,
-                type
-            )
-            VALUES
-            (
-                NULL,
-                NULL,
-                ?,
-                ?,
-                ?,
-                ?
-            )
-            `,
+            `INSERT INTO notifications
+                (student_id, admin_id, staff_id, request_id, message, type)
+             VALUES (NULL, NULL, ?, ?, ?, ?)`,
             [
                 staff.staff_id,
                 request_id,
@@ -204,12 +97,8 @@ const createStaffNotifications = async ({
                 type
             ]
         );
-
     }
-
 };
-
-
 
 // =========================================================
 // GET STUDENT NOTIFICATIONS
