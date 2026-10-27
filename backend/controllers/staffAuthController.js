@@ -39,24 +39,21 @@ const loginStaff = async (req, res) => {
         // FIND STAFF
         // =================================================
 
-        const [staffRows] =
-            await db.execute(
-                `
-                SELECT
-                    staff_id,
-                    name,
-                    email,
-                    department_id,
-                    designation,
-                    password,
-                    status,
-                    must_change_password
-                FROM staff
-                WHERE email = ?
-                LIMIT 1
-                `,
-                [normalizedEmail]
-            );
+        const [staffRows] = await db.execute(
+    `
+    SELECT
+        staff_id,
+        name,
+        email,
+        department_id,
+        password,
+        status
+    FROM staff
+    WHERE email = ?
+    LIMIT 1
+    `,
+    [normalizedEmail]
+);
 
 
         if (staffRows.length === 0) {
@@ -159,46 +156,37 @@ const loginStaff = async (req, res) => {
         // RESPONSE
         // =================================================
 
-        return res.status(200).json({
+ // =================================================
+// RESPONSE
+// =================================================
 
-            success: true,
+return res.status(200).json({
 
-            message:
-                "Staff login successful.",
+    success: true,
 
-            token,
+    message: "Staff login successful.",
 
-            must_change_password:
-                Boolean(
-                    staff.must_change_password
-                ),
+    token,
 
-            staff: {
+    must_change_password: false,
 
-                id:
-                    staff.staff_id,
+    staff: {
 
-                staff_id:
-                    staff.staff_id,
+        id: staff.staff_id,
 
-                name:
-                    staff.name,
+        staff_id: staff.staff_id,
 
-                email:
-                    staff.email,
+        name: staff.name,
 
-                department_id:
-                    staff.department_id,
+        email: staff.email,
 
-                designation:
-                    staff.designation,
+        department_id: staff.department_id,
 
-                status:
-                    staff.status
+        status: staff.status
 
-            }
+    }
 
-        });
+});
 
     }
 
@@ -236,27 +224,24 @@ const getStaffProfile = async (req, res) => {
             req.staff.staff_id;
 
 
-        const [rows] =
-            await db.execute(
-                `
-                SELECT
-                    s.staff_id,
-                    s.name,
-                    s.email,
-                    s.department_id,
-                    s.designation,
-                    s.status,
-                    s.must_change_password,
-                    d.department_name
-                FROM staff s
-                LEFT JOIN departments d
-                    ON s.department_id =
-                       d.department_id
-                WHERE s.staff_id = ?
-                LIMIT 1
-                `,
-                [staffId]
-            );
+        const [rows] = await db.execute(
+    `
+    SELECT
+        s.staff_id,
+        s.name,
+        s.email,
+        s.department_id,
+        s.status,
+        s.created_at,
+        d.department_name
+    FROM staff s
+    LEFT JOIN departments d
+        ON s.department_id = d.department_id
+    WHERE s.staff_id = ?
+    LIMIT 1
+    `,
+    [staffId]
+);
 
 
         if (rows.length === 0) {
@@ -587,19 +572,16 @@ const changeStaffPassword = async (req, res) => {
         // =================================================
 
         await db.execute(
-            `
-            UPDATE staff
-            SET
-                password = ?,
-                must_change_password = 0
-            WHERE staff_id = ?
-            `,
-            [
-                hashedPassword,
-                staffId
-            ]
-        );
-
+    `
+    UPDATE staff
+    SET password = ?
+    WHERE staff_id = ?
+    `,
+    [
+        hashedPassword,
+        staffId
+    ]
+);
 
         return res.status(200).json({
 
