@@ -4129,13 +4129,29 @@ tableBody.innerHTML =
                     ? "Inactive"
                     : "Active";
 
-            return `
-                <tr>
-                    <td>#${staff.staff_id}</td>
+return `
+    <tr>
+        <td>#${staff.staff_id}</td>
+        <td>${escapeHTML(staff.name || "N/A")}</td>
+        <td>${escapeHTML(staff.email || "N/A")}</td>
+        <td>${escapeHTML(staff.department_name || "N/A")}</td>
+        <td>${escapeHTML(staff.created_at || "N/A")}</td>
+        <td>
+            <span class="status-badge ${statusClass}">
+                ${escapeHTML(status)}
+            </span>
+        </td>
+        <td>
+            <button
+                class="btn btn-sm"
+                onclick="toggleStaffStatus(${staff.staff_id}, '${nextStatus}')">
+                ${actionText}
+            </button>
+        </td>
+    </tr>
+`;
 
-                    <!-- Keep your existing table columns here -->
-                </tr>
-            `;
+
         }
     ).join("");}
 // =========================================================
