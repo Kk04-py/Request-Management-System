@@ -40,6 +40,7 @@ const getAllStaff = async (req, res) => {
         s.name,
         s.email,
         s.department_id,
+        s.status,
         s.created_at,
         d.department_name
     FROM staff s
