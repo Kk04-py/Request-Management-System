@@ -34,21 +34,19 @@ function generateTemporaryPassword() {
 const getAllStaff = async (req, res) => {
     try {
         const [staff] = await db.execute(`
-            SELECT
-                s.staff_id,
-                s.name,
-                s.email,
-                s.designation,
-                s.status,
-                s.must_change_password,
-                s.created_at,
-                d.department_id,
-                d.department_name
-            FROM staff s
-            JOIN departments d
-                ON s.department_id = d.department_id
-            ORDER BY s.created_at DESC
-        `);
+           
+    SELECT
+        s.staff_id,
+        s.name,
+        s.email,
+        s.department_id,
+        s.created_at,
+        d.department_name
+    FROM staff s
+    LEFT JOIN departments d
+        ON s.department_id = d.department_id
+    ORDER BY s.created_at DESC
+`);
 
         res.status(200).json({
             success: true,
