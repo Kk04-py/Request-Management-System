@@ -4116,21 +4116,21 @@ function renderStaffTable(staffList) {
         staffList.map(
             staff => {
 
-                const statusClass =
-                    staff.status
-                        .toLowerCase();
+                ```javascript
+const status = staff.status || "Active";
 
+const statusClass = status.toLowerCase();
 
-                const actionText =
-                    staff.status === "Active"
-                        ? "Deactivate"
-                        : "Activate";
+const actionText =
+    status === "Active"
+        ? "Deactivate"
+        : "Activate";
 
-
-                const nextStatus =
-                    staff.status === "Active"
-                        ? "Inactive"
-                        : "Active";
+const nextStatus =
+    status === "Active"
+        ? "Inactive"
+        : "Active";
+```
 
 
                 return `
@@ -4170,13 +4170,7 @@ function renderStaffTable(staffList) {
 
                         <td>
                             <span
-                                class="status ${statusClass}">
-
-                                ${escapeHTML(
-                                    staff.status
-                                )}
-
-                            </span>
+                                class="status ${statusClass}"> ${escapeHTML(status)} </span>
                         </td>
 
                         <td>
