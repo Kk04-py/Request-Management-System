@@ -4079,81 +4079,74 @@ async function loadStaff() {
 // =========================================================
 
 function renderStaffTable(staffList) {
-
-    const tableBody =
-        document.getElementById(
-            "staffTableBody"
-        );
-
+    const tableBody = document.getElementById("staffTableBody");
 
     if (!tableBody) {
         return;
     }
 
-
-    if (
-        !staffList ||
-        staffList.length === 0
-    ) {
-
+    if (!staffList || staffList.length === 0) {
         tableBody.innerHTML = `
             <tr>
-                <td
-                    colspan="6"
-                    class="no-data">
-
+                <td colspan="6" class="no-data">
                     No staff members available.
-
                 </td>
             </tr>
         `;
-
         return;
     }
 
+    tableBody.innerHTML = staffList.map(staff => {
+        const status = staff.status || "Active";
+        const statusClass = status.toLowerCase();
 
-tableBody.innerHTML =
-    staffList.map(
-        staff => {
+        const actionText = status === "Active"
+            ? "Deactivate"
+            : "Activate";
 
-            const status = staff.status || "Active";
-            const statusClass = status.toLowerCase();
+        const nextStatus = status === "Active"
+            ? "Inactive"
+            : "Active";
 
-            const actionText =
-                status === "Active"
-                    ? "Deactivate"
-                    : "Activate";
+        return `
+            <tr>
+                <td>
+                    #${staff.staff_id}
+                </td>
 
-            const nextStatus =
-                status === "Active"
-                    ? "Inactive"
-                    : "Active";
+                <td>
+                    <strong>
+                        ${escapeHTML(staff.name || "N/A")}
+                    </strong>
+                </td>
 
-return `
-    <tr>
-        <td>#${staff.staff_id}</td>
-        <td>${escapeHTML(staff.name || "N/A")}</td>
-        <td>${escapeHTML(staff.email || "N/A")}</td>
-        <td>${escapeHTML(staff.department_name || "N/A")}</td>
-        <td>${escapeHTML(staff.created_at || "N/A")}</td>
-        <td>
-            <span class="status-badge ${statusClass}">
-                ${escapeHTML(status)}
-            </span>
-        </td>
-        <td>
-            <button
-                class="btn btn-sm"
-                onclick="toggleStaffStatus(${staff.staff_id}, '${nextStatus}')">
-                ${actionText}
-            </button>
-        </td>
-    </tr>
-`;
+                <td>
+                    ${escapeHTML(staff.email || "N/A")}
+                </td>
+
+                <td>
+                    ${escapeHTML(staff.department_name || "N/A")}
+                </td>
+
+                <td>
+                    <span class="status ${statusClass}">
+                        ${escapeHTML(status)}
+                    </span>
+                </td>
+
+                <td>
+                    <button
+                        class="btn btn-sm"
+                        onclick="toggleStaffStatus(${staff.staff_id}, '${nextStatus}')">
+                        ${actionText}
+                    </button>
+                </td>
+            </tr>
+        `;
+    }).join("");
+}
 
 
-        }
-    ).join("");}
 // =========================================================
 // FILTER STAFF
 // =========================================================
@@ -4232,9 +4225,9 @@ async function toggleStaffStatus(
 ) {
 
     const action =
-        status === "Active"
-            ? "activate"
-            : "deactivate";
+    status === "Active"
+        ? "activate"
+        : "deactivate";
 
 
     const confirmed =
